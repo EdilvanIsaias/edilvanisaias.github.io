@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kyrios Clinical Services</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header>
+    <div class="overlay">
+      <div class="container">
+        <h1>Kyrios Clinical Services</h1>
+        <p>Cuidado humano com excelência, precisão e propósito.</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="about">
+      <h2>Sobre Nós</h2>
+      <p><strong>Kyrios Clinical Services</strong> nasceu com o propósito de unir excelência profissional e princípios éticos fundamentados em valores cristãos. O termo <em>Kyrios</em>, que em grego significa “Senhor”, reflete nossa inspiração em realizar um trabalho guiado por propósito, compaixão e integridade — um serviço eficiente, humano e na hora certa.</p>
+      <p>Não somos uma instituição confessional, mas nossa filosofia se baseia em fundamentos teológicos e morais amplos do cristianismo protestante, que inspiram cada aspecto do nosso atendimento: respeito, responsabilidade e cuidado genuíno com o próximo.</p>
+    </section>
+
+    <section class="agendamentos">
+      <h2>Agende sua Consulta</h2>
+      <div class="cards">
+        <div class="card">
+          <img src="images/presencial.jpg" alt="Consulta Presencial" />
+          <h3>Consulta Presencial</h3>
+          <p>Atendimento em nosso consultório com equipe especializada.</p>
+          <p><strong>Local:</strong> Rua da Saúde, 123 - São Paulo - SP</p>
+          <button onclick="abrirAgendamento('presencial')">Agendar</button>
+        </div>
+
+        <div class="card">
+          <img src="images/online.jpg" alt="Consulta Online" />
+          <h3>Consulta Online</h3>
+          <p>Atendimento via videochamada. Praticidade e conforto para você.</p>
+          <p><strong>Email:</strong> online@kyrios.com.br</p>
+          <button onclick="abrirAgendamento('online')">Agendar</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="calendar" id="calendar-section" style="display: none;">
+      <h2>Escolha uma data e horário</h2>
+      <p class="obs">Cada consulta tem duração média de <strong>30 minutos</strong>. Escolha um horário disponível:</p>
+      <div id="calendar-placeholder"></div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <h3>Suporte e Contato</h3>
+      <ul>
+        <li><strong>Telefone:</strong> (11) 91234-5678</li>
+        <li><strong>Email:</strong> suporte@kyrios.com.br</li>
+        <li><strong>Endereço:</strong> Rua da Saúde, 123 - São Paulo - SP</li>
+      </ul>
+      <p>&copy; 2025 Kyrios Clinical Services. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="calendar.js"></script>
+</body>
+</html>
