@@ -226,7 +226,6 @@
     </div>
   </header>
 
-  <!-- ZAIA WIDGET: Criado via iframe, não mais script padrão -->
   <main class="container">
     <section class="about">
       <h2>Sobre Nós</h2>
@@ -258,7 +257,13 @@
     <section class="calendar" id="calendar-section" style="display: block;">
       <h2>Converse com Sofia</h2>
       <p class="obs">Nossa assistente pode ajudá-lo a agendar uma consulta:</p>
-      <button onclick="abrirChat()">Conversar com Sofia</button>
+      <button id="btn-abrir-chat" style="font-size: 18px; padding: 12px 24px; cursor:pointer; display: flex; align-items: center; gap: 10px;">
+        <!-- Ícone maior -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M8 1a7 7 0 1 0 4.95 11.95l3.37 1.68a.5.5 0 0 0 .63-.63l-1.68-3.37A7 7 0 0 0 8 1zM7 7v3h2V7H7z"/>
+        </svg>
+        Conversar com Sofia
+      </button>
     </section>
   </main>
 
@@ -313,64 +318,113 @@
     }
   </script>
 
-  <!-- Chat Sofia via iframe -->
+  <!-- Chat Sofia via iframe - versão expandida para foco total -->
   <script>
     function inserirChat() {
-      if (document.getElementById('iframe-sofia-chat')) return; // evita duplicar
+      if (document.getElementById('iframe-sofia-chat')) return;
 
+      // Fundo escuro semi-transparente para foco
+      const overlay = document.createElement('div');
+      overlay.id = 'chat-overlay';
+      overlay.style.cssText = `
+        position: fixed;
+        top: 0; left: 0; width: 100vw; height: 100vh;
+        background: rgba(0,0,0,0.6);
+        z-index: 4000;
+        display: none;
+        justify-content: center;
+        align-items: center;
+      `;
+      document.body.appendChild(overlay);
+
+      // Iframe do chat
       const iframe = document.createElement('iframe');
       iframe.src = "https://platform.zaia.app/embed/chat/65791";
       iframe.id = "iframe-sofia-chat";
       iframe.style.cssText = `
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        width: 350px;
-        height: 500px;
+        width: 1050px;  /* 3x 350px */
+        height: 620px;  /* um pouco maior */
         border: none;
-        z-index: 3000;
-        display: none;
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        border-radius: 12px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.4);
+        font-size: 18px;
       `;
-      document.body.appendChild(iframe);
+      overlay.appendChild(iframe);
+
+      // Botão fechar
+      const btnFechar = document.createElement('button');
+      btnFechar.textContent = '×';
+      btnFechar.title = 'Fechar chat';
+      btnFechar.style.cssText = `
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: #fff;
+        border: none;
+        font-size: 36px;
+        font-weight: bold;
+        color: #444;
+        cursor: pointer;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        line-height: 46px;
+        text-align: center;
+        z-index: 4100;
+      `;
+      btnFechar.onclick = fecharChat;
+      overlay.appendChild(btnFechar);
     }
 
     function abrirChat() {
-      const iframe = document.getElementById('iframe-sofia-chat');
-      if (!iframe) return;
-      iframe.style.display = 'block';
+      const overlay = document.getElementById('chat-overlay');
+      if (!overlay) return;
 
-      // Envia mensagem inicial “Como posso ajudar?”
-      setTimeout(() => {
+      overlay.style.display = 'flex';
+
+      // Mensagem inicial já quase pronta pra enviar (se Zaia aceitar)
+      const iframe = document.getElementById('iframe-sofia-chat');
+      if (iframe) {
+        // Primeiro foca o chat
         iframe.contentWindow.postMessage({
           type: 'sendMessage',
-          message: "Olá! Como posso ajudar? (Você pode digitar “Suporte” para ser encaminhado visualmente a um humano)"
+          message: "Olá! Como posso ajudar? (Digite 'Suporte' para atendimento humano.)"
         }, '*');
-      }, 300);
+
+        // Simular mensagem pré-preenchida (depende do suporte da API Zaia)
+        // Como não temos doc, vamos repetir a mensagem para destacar
+      }
     }
 
+    function fecharChat() {
+      const overlay = document.getElementById('chat-overlay');
+      if (overlay) overlay.style.display = 'none';
+    }
+
+    // Mostrar painel humano ao digitar “suporte”
     function mostrarPainelHumano() {
       if (document.getElementById('painel-humano')) return;
       const div = document.createElement('div');
       div.id = 'painel-humano';
       div.style.cssText = `
         position: fixed;
-        bottom: 540px;
+        bottom: 80px;
         right: 20px;
         background: #fff;
-        border: 1px solid #666;
-        padding: 12px;
-        border-radius: 6px;
-        z-index: 3100;
-        max-width: 320px;
+        border: 2px solid #d9534f;
+        padding: 16px;
+        border-radius: 8px;
+        z-index: 4100;
+        max-width: 380px;
         font-family: Arial, sans-serif;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        color: #d9534f;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
       `;
-      div.innerHTML = `<p><strong>Atenção:</strong> Você digitou “Suporte”. Isso fará com que você seja encaminhado visualmente para atendimento humano.</p>`;
+      div.innerHTML = `<strong>Atenção:</strong> Você digitou “Suporte”. Isso fará com que você seja encaminhado visualmente para atendimento humano.`;
       document.body.appendChild(div);
     }
 
+    // Escuta mensagens do iframe
     window.addEventListener('message', (event) => {
       const data = event.data;
       if (!data) return;
@@ -389,13 +443,23 @@
       }
     });
 
+    // Inicialização no DOM ready
     window.addEventListener('DOMContentLoaded', () => {
       inserirChat();
-      setTimeout(() => abrirChat(), 500);
+    });
+
+    // Botão abrir chat vinculado
+    document.addEventListener('DOMContentLoaded', () => {
+      const btnChat = document.getElementById('btn-abrir-chat');
+      if (btnChat) {
+        btnChat.addEventListener('click', abrirChat);
+      }
     });
   </script>
 
+
 </body>
 </html>
+
 
 
