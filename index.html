@@ -150,6 +150,8 @@
 </head>
 <body>
 
+<body>
+
   <!-- ===== NAVBAR COM LINKS INTERNOS ===== -->
   <nav>
     <ul>
@@ -226,15 +228,7 @@
     </div>
   </header>
 
-  <!-- ZAIA WIDGET -->
-  <script>
-    window.ZWidget = {
-      AgentURL: "https://platform.zaia.app/embed/chat/65791",
-    };
-  </script>
-  <script src="https://platform.zaia.app/script/widget-loader.js"></script>
-
-  <!-- CONTEÚDO ORIGINAL MANTIDO -->
+  <!-- ZAIA WIDGET: Criado via iframe, não mais script padrão -->
   <main class="container">
     <section class="about">
       <h2>Sobre Nós</h2>
@@ -263,11 +257,10 @@
       </div>
     </section>
 
-    <!-- SEÇÃO ATUALIZADA DE CALENDÁRIO -->
-    <section class="calendar" id="calendar-section" style="display: none;">
+    <section class="calendar" id="calendar-section" style="display: block;">
       <h2>Converse com Sofia</h2>
       <p class="obs">Nossa assistente pode ajudá-lo a agendar uma consulta:</p>
-      <button onclick="window.ZWidget.open()">Conversar com Sofia</button>
+      <button onclick="abrirChat()">Conversar com Sofia</button>
     </section>
   </main>
 
@@ -305,10 +298,13 @@
         event.target.style.display = 'none';
       }
     }
+  </script>
 
+  <!-- Funções para agendamento -->
+  <script>
     function abrirAgendamento(tipo) {
       const mensagem = `Olá, Sofia! Gostaria de agendar uma consulta ${tipo === 'presencial' ? 'presencial' : 'online'}.`;
-      
+
       if (window.ZWidget && typeof window.ZWidget.open === 'function') {
         window.ZWidget.open();
       }
@@ -316,9 +312,93 @@
       if (window.ZWidget && typeof window.ZWidget.sendMessage === 'function') {
         window.ZWidget.sendMessage(mensagem);
       }
-
-      document.getElementById('calendar-section').style.display = 'block';
     }
   </script>
+
+  <!-- Chat Sofia via iframe -->
+  <script>
+    function inserirChat() {
+      if (document.getElementById('iframe-sofia-chat')) return; // evita duplicar
+
+      const iframe = document.createElement('iframe');
+      iframe.src = "https://platform.zaia.app/embed/chat/65791";
+      iframe.id = "iframe-sofia-chat";
+      iframe.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 350px;
+        height: 500px;
+        border: none;
+        z-index: 3000;
+        display: none;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      `;
+      document.body.appendChild(iframe);
+    }
+
+    function abrirChat() {
+      const iframe = document.getElementById('iframe-sofia-chat');
+      if (!iframe) return;
+      iframe.style.display = 'block';
+
+      // Envia mensagem inicial “Como posso ajudar?”
+      setTimeout(() => {
+        iframe.contentWindow.postMessage({
+          type: 'sendMessage',
+          message: "Olá! Como posso ajudar? (Você pode digitar “Suporte” para ser encaminhado visualmente a um humano)"
+        }, '*');
+      }, 300);
+    }
+
+    function mostrarPainelHumano() {
+      if (document.getElementById('painel-humano')) return;
+      const div = document.createElement('div');
+      div.id = 'painel-humano';
+      div.style.cssText = `
+        position: fixed;
+        bottom: 540px;
+        right: 20px;
+        background: #fff;
+        border: 1px solid #666;
+        padding: 12px;
+        border-radius: 6px;
+        z-index: 3100;
+        max-width: 320px;
+        font-family: Arial, sans-serif;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      `;
+      div.innerHTML = `<p><strong>Atenção:</strong> Você digitou “Suporte”. Isso fará com que você seja encaminhado visualmente para atendimento humano.</p>`;
+      document.body.appendChild(div);
+    }
+
+    window.addEventListener('message', (event) => {
+      const data = event.data;
+      if (!data) return;
+      if (data.type === 'userMessage') {
+        const texto = (data.message || '').trim().toLowerCase();
+        if (texto === 'suporte') {
+          const iframe = document.getElementById('iframe-sofia-chat');
+          if (iframe) {
+            iframe.contentWindow.postMessage({
+              type: 'sendMessage',
+              message: 'Você digitou “Suporte”. Isso fará com que você seja encaminhado visualmente para atendimento humano.'
+            }, '*');
+            mostrarPainelHumano();
+          }
+        }
+      }
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      inserirChat();
+      setTimeout(() => abrirChat(), 500);
+    });
+  </script>
+
+</body>
+
 </body>
 </html>
+
