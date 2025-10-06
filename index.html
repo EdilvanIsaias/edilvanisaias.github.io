@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Kyrios Clinical Services</title>
   <link rel="stylesheet" href="style.css" />
   <script>
@@ -18,17 +18,8 @@
 </head>
 <body>
 
-  <header>
-    <div class="overlay">
-      <div class="container">
-        <h1>Kyrios Clinical Services</h1>
-        <p>Cuidado humano com excelência, precisão e propósito.</p>
-      </div>
-    </div>
-  </header>
-
-  <!-- Menu principal -->
-  <nav>
+  <!-- Menu fixo no topo -->
+  <nav class="top-menu">
     <ul class="menu">
       <li>
         Financeiro
@@ -60,8 +51,21 @@
           <li><a href="trabalhe-conosco.html">Trabalhe conosco</a></li>
         </ul>
       </li>
+      <li class="login-menu">
+        <button onclick="location.href='login.html'">Login</button>
+      </li>
     </ul>
   </nav>
+
+  <!-- Cabeçalho abaixo do menu -->
+  <header>
+    <div class="overlay">
+      <div class="container">
+        <h1>Kyrios Clinical Services</h1>
+        <p>Cuidado humano com excelência, precisão e propósito.</p>
+      </div>
+    </div>
+  </header>
 
   <main class="container">
     <section class="about">
