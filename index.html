@@ -8,13 +8,6 @@
 </head>
 <body>
 
-  <header>
-    <div class="container">
-      <h1>Kyrios Clinical Services</h1>
-      <p>Cuidado humano com excelência, precisão e propósito.</p>
-    </div>
-  </header>
-
   <nav class="main-menu">
     <ul>
       <li>
@@ -51,6 +44,13 @@
     </ul>
   </nav>
 
+  <header>
+    <div class="container">
+      <h1>Kyrios Clinical Services</h1>
+      <p>Cuidado humano com excelência, precisão e propósito.</p>
+    </div>
+  </header>
+
   <main class="container">
     <section class="about">
       <h2>Sobre Nós</h2>
@@ -82,12 +82,10 @@
       AgentURL: "https://platform.zaia.app/embed/chat/65791",
       openOnLoad: true
     };
-    // Função para abrir chat e enviar mensagem inicial
+
     function abrirChat(mensagem) {
       if (window.ZWidget && window.ZWidget.openChat) {
         window.ZWidget.openChat();
-        // Supondo que a API do chatbot permita enviar mensagem programaticamente:
-        // (Isso depende da API do Zaia, ajuste conforme necessário)
         setTimeout(() => {
           window.ZWidget.sendMessage && window.ZWidget.sendMessage(mensagem);
         }, 500);
