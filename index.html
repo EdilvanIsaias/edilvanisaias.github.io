@@ -1,8 +1,3 @@
-<?php
-session_start();
-$usuario = $_SESSION['usuario_nome'] ?? null;
-?>
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -10,197 +5,73 @@ $usuario = $_SESSION['usuario_nome'] ?? null;
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kyrios Clinical Services</title>
   <link rel="stylesheet" href="style.css" />
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-    }
-
-    header {
-      background: #005fa3;
-      color: #fff;
-      padding: 30px 0;
-      text-align: center;
-    }
-
-    nav {
-      background: #f5f5f5;
-      padding: 10px 0;
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-    }
-
-    nav li {
-      position: relative;
-    }
-
-    nav a {
-      text-decoration: none;
-      color: #333;
-      font-weight: bold;
-    }
-
-    nav li ul {
-      display: none;
-      position: absolute;
-      background: #fff;
-      list-style: none;
-      padding: 10px;
-      top: 100%;
-      left: 0;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-      z-index: 99;
-    }
-
-    nav li:hover ul {
-      display: block;
-    }
-
-    nav li ul li {
-      margin: 10px 0;
-    }
-
-    main {
-      max-width: 960px;
-      margin: 30px auto;
-      padding: 0 20px;
-    }
-
-    footer {
-      background: #f0f0f0;
-      padding: 30px;
-      text-align: center;
-      margin-top: 50px;
-    }
-
-    .login-area {
-      position: absolute;
-      top: 10px;
-      right: 20px;
-    }
-
-    .login-area ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-
-    .login-area li {
-      position: relative;
-    }
-
-    .login-area li ul {
-      right: 0;
-    }
-
-    .obs {
-      font-size: 14px;
-      color: #777;
-    }
-  </style>
 </head>
 <body>
-
-  <!-- Login/Menu do usuário -->
-  <div class="login-area">
-    <ul>
-      <li>
-        <a href="#">
-          <?php if ($usuario): ?>
-            👤 <?php echo htmlspecialchars($usuario); ?>
-          <?php else: ?>
-            🔐 Login
-          <?php endif; ?>
-        </a>
-        <ul>
-          <?php if ($usuario): ?>
-            <li><a href="perfil.php">Ver Perfil</a></li>
-            <li><a href="logout.php">Sair</a></li>
-          <?php else: ?>
-            <li><a href="login.php">Entrar</a></li>
-            <li><a href="cadastro.php">Cadastro</a></li>
-          <?php endif; ?>
-        </ul>
-      </li>
-    </ul>
-  </div>
-
-  <!-- Cabeçalho -->
   <header>
-    <h1>Kyrios Clinical Services</h1>
-    <p>Cuidado humano com excelência, precisão e propósito.</p>
+    <div class="overlay">
+      <div class="container">
+        <h1>Kyrios Clinical Services</h1>
+        <p>Cuidado humano com excelência, precisão e propósito.</p>
+      </div>
+    </div>
   </header>
 
-  <!-- Menu principal -->
-  <nav>
-    <ul>
-      <li>
-        <a href="financeiro.php">Financeiro</a>
-        <ul>
-          <li><a href="financeiro.php#planos">Planos</a></li>
-          <li><a href="financeiro.php#segunda-via">Segunda via</a></li>
-          <li><a href="financeiro.php#cartao">Cartão</a></li>
-        </ul>
-      </li>
-
-      <li>
-        <a href="#">Consultas</a>
-        <ul>
-          <li><a href="consultas-online.php">Agendamento online</a></li>
-          <li><a href="consultas-presenciais.php">Agendamento presencial</a></li>
-        </ul>
-      </li>
-
-      <li>
-        <a href="#">Exames</a>
-        <ul>
-          <li><a href="exames-resultado.php">Resultado</a></li>
-          <li><a href="exames-acompanhamento.php">Acompanhamento</a></li>
-        </ul>
-      </li>
-
-      <li>
-        <a href="#">Suporte Técnico</a>
-        <ul>
-          <li><a href="https://wa.me/5511999999999" target="_blank">WhatsApp</a></li>
-          <li><a href="mailto:suporte@kyrios.com.br">E-mail</a></li>
-          <li><a href="trabalhe-conosco.php">Trabalhe conosco</a></li>
-        </ul>
-      </li>
-    </ul>
-  </nav>
-
-  <!-- Conteúdo principal -->
-  <main>
+  <main class="container">
     <section class="about">
       <h2>Sobre Nós</h2>
       <p><strong>Kyrios Clinical Services</strong> nasceu com o propósito de unir excelência profissional e princípios éticos fundamentados em valores cristãos. O termo <em>Kyrios</em>, que em grego significa “Senhor”, reflete nossa inspiração em realizar um trabalho guiado por propósito, compaixão e integridade — um serviço eficiente, humano e na hora certa.</p>
       <p>Não somos uma instituição confessional, mas nossa filosofia se baseia em fundamentos teológicos e morais amplos do cristianismo protestante, que inspiram cada aspecto do nosso atendimento: respeito, responsabilidade e cuidado genuíno com o próximo.</p>
     </section>
+
+    <section class="agendamentos">
+      <h2>Agende sua Consulta</h2>
+      <p>Para agendamentos, utilize a <strong>Sofia</strong>, nossa assistente virtual. Ela pode ajudar você a escolher o melhor horário e tipo de atendimento.</p>
+      <button onclick="abrirChat()">Falar com a Sofia</button>
+    </section>
   </main>
 
-  <!-- Rodapé -->
   <footer>
-    <h3>Suporte e Contato</h3>
-    <ul>
-      <li><strong>Telefone:</strong> (11) 91234-5678</li>
-      <li><strong>Email:</strong> suporte@kyrios.com.br</li>
-      <li><strong>Endereço:</strong> Rua da Saúde, 123 - São Paulo - SP</li>
-    </ul>
-    <p>&copy; 2025 Kyrios Clinical Services. Todos os direitos reservados.</p>
+    <div class="container">
+      <h3>Suporte e Contato</h3>
+      <ul>
+        <li><strong>Telefone:</strong> (11) 91234-5678</li>
+        <li><strong>Email:</strong> suporte@kyrios.com.br</li>
+        <li><strong>Endereço:</strong> Rua da Saúde, 123 - São Paulo - SP</li>
+      </ul>
+      <p>&copy; 2025 Kyrios Clinical Services. Todos os direitos reservados.</p>
+    </div>
   </footer>
 
-  <!-- Zaia Widget -->
+  <!-- Chatbot Zaia Embed -->
   <script>
     window.ZWidget = {
-      AgentURL: "https://platform.zaia.app/embed/chat/65791",
+      AgentURL: "https://platform.zaia.app/embed/chat/65791" // Substitua pela URL do seu chatbot
     };
   </script>
-  <script src="https://platform.zaia.app/script/widget-loader.js"></script>
+  <script src="https://platform.zaia.app/script/widget-loader.js" async></script>
 
+  <!-- Script para abrir automaticamente e reabrir chat -->
+  <script>
+    // Tenta abrir o chatbot automaticamente quando a página carrega
+    window.addEventListener('load', function () {
+      const interval = setInterval(() => {
+        const zaiaChatButton = document.querySelector('#zchat-button');
+        if (zaiaChatButton) {
+          zaiaChatButton.click();
+          clearInterval(interval);
+        }
+      }, 500);
+    });
+
+    // Botão \"Falar com a Sofia\" para reabrir o chatbot
+    function abrirChat() {
+      const zaiaChatButton = document.querySelector('#zchat-button');
+      if (zaiaChatButton) {
+        zaiaChatButton.click();
+      } else {
+        alert(\"Chatbot não carregado. Verifique sua conexão.\");
+      }
+    }
+  </script>
 </body>
 </html>
