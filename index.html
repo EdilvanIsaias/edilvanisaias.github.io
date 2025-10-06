@@ -226,6 +226,48 @@
     </div>
   </header>
 
+  <!-- ZAIA WIDGET - BOTÃO E CHAT -->
+  <button id="btn-abrir-chat" style="font-size: 18px; padding: 12px 24px; cursor:pointer; display: flex; align-items: center; gap: 10px; margin: 1rem;">
+    <!-- Ícone maior -->
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" viewBox="0 0 16 16">
+      <path d="M8 1a7 7 0 1 0 4.95 11.95l3.37 1.68a.5.5 0 0 0 .63-.63l-1.68-3.37A7 7 0 0 0 8 1zM7 7v3h2V7H7z"/>
+    </svg>
+    Conversar com Sofia
+  </button>
+
+  <div id="chat-overlay" style="
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+  ">
+    <div style="position: relative; width: 1050px; height: 620px; background: #fff; border-radius: 12px; box-shadow: 0 0 20px rgba(0,0,0,0.4); overflow: hidden;">
+      <button id="btn-fechar-chat" title="Fechar chat" style="
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #ff4c4c;
+        border: none;
+        color: white;
+        font-size: 28px;
+        font-weight: bold;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        line-height: 32px;
+        text-align: center;
+        z-index: 10;
+      ">×</button>
+
+      <iframe id="iframe-sofia-chat" src="https://platform.zaia.app/embed/chat/65791" style="width: 100%; height: 100%; border: none; font-size: 18px;"></iframe>
+    </div>
+  </div>
+
+  <!-- CONTEÚDO ORIGINAL MANTIDO -->
   <main class="container">
     <section class="about">
       <h2>Sobre Nós</h2>
@@ -254,16 +296,10 @@
       </div>
     </section>
 
-    <section class="calendar" id="calendar-section" style="display: block;">
+    <section class="calendar" id="calendar-section" style="display: none;">
       <h2>Converse com Sofia</h2>
       <p class="obs">Nossa assistente pode ajudá-lo a agendar uma consulta:</p>
-      <button id="btn-abrir-chat" style="font-size: 18px; padding: 12px 24px; cursor:pointer; display: flex; align-items: center; gap: 10px;">
-        <!-- Ícone maior -->
-        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" viewBox="0 0 16 16">
-          <path d="M8 1a7 7 0 1 0 4.95 11.95l3.37 1.68a.5.5 0 0 0 .63-.63l-1.68-3.37A7 7 0 0 0 8 1zM7 7v3h2V7H7z"/>
-        </svg>
-        Conversar com Sofia
-      </button>
+      <button onclick="window.ZWidget.open()">Conversar com Sofia</button>
     </section>
   </main>
 
@@ -303,156 +339,43 @@
     }
   </script>
 
-  <!-- Funções para agendamento -->
+  <!-- Script para abrir/fechar chat e enviar mensagem inicial -->
   <script>
-    function abrirAgendamento(tipo) {
-      const mensagem = `Olá, Sofia! Gostaria de agendar uma consulta ${tipo === 'presencial' ? 'presencial' : 'online'}.`;
+    const btnAbrir = document.getElementById('btn-abrir-chat');
+    const overlay = document.getElementById('chat-overlay');
+    const btnFechar = document.getElementById('btn-fechar-chat');
+    const iframe = document.getElementById('iframe-sofia-chat');
 
-      if (window.ZWidget && typeof window.ZWidget.open === 'function') {
-        window.ZWidget.open();
-      }
-
-      if (window.ZWidget && typeof window.ZWidget.sendMessage === 'function') {
-        window.ZWidget.sendMessage(mensagem);
-      }
-    }
-  </script>
-
-  <!-- Chat Sofia via iframe - versão expandida para foco total -->
-  <script>
-    function inserirChat() {
-      if (document.getElementById('iframe-sofia-chat')) return;
-
-      // Fundo escuro semi-transparente para foco
-      const overlay = document.createElement('div');
-      overlay.id = 'chat-overlay';
-      overlay.style.cssText = `
-        position: fixed;
-        top: 0; left: 0; width: 100vw; height: 100vh;
-        background: rgba(0,0,0,0.6);
-        z-index: 4000;
-        display: none;
-        justify-content: center;
-        align-items: center;
-      `;
-      document.body.appendChild(overlay);
-
-      // Iframe do chat
-      const iframe = document.createElement('iframe');
-      iframe.src = "https://platform.zaia.app/embed/chat/65791";
-      iframe.id = "iframe-sofia-chat";
-      iframe.style.cssText = `
-        width: 1050px;  /* 3x 350px */
-        height: 620px;  /* um pouco maior */
-        border: none;
-        border-radius: 12px;
-        box-shadow: 0 0 20px rgba(0,0,0,0.4);
-        font-size: 18px;
-      `;
-      overlay.appendChild(iframe);
-
-      // Botão fechar
-      const btnFechar = document.createElement('button');
-      btnFechar.textContent = '×';
-      btnFechar.title = 'Fechar chat';
-      btnFechar.style.cssText = `
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        background: #fff;
-        border: none;
-        font-size: 36px;
-        font-weight: bold;
-        color: #444;
-        cursor: pointer;
-        border-radius: 50%;
-        width: 50px;
-        height: 50px;
-        line-height: 46px;
-        text-align: center;
-        z-index: 4100;
-      `;
-      btnFechar.onclick = fecharChat;
-      overlay.appendChild(btnFechar);
-    }
-
-    function abrirChat() {
-      const overlay = document.getElementById('chat-overlay');
-      if (!overlay) return;
-
+    btnAbrir.addEventListener('click', () => {
       overlay.style.display = 'flex';
 
-      // Mensagem inicial já quase pronta pra enviar (se Zaia aceitar)
-      const iframe = document.getElementById('iframe-sofia-chat');
-      if (iframe) {
-        // Primeiro foca o chat
-        iframe.contentWindow.postMessage({
-          type: 'sendMessage',
-          message: "Olá! Como posso ajudar? (Digite 'Suporte' para atendimento humano.)"
-        }, '*');
+      // Envia mensagem inicial ao iframe via postMessage, se suportado
+      iframe.contentWindow.postMessage({
+        type: 'sendMessage',
+        message: "Olá! Como posso ajudar? (Digite 'Suporte' para atendimento humano.)"
+      }, '*');
+    });
 
-        // Simular mensagem pré-preenchida (depende do suporte da API Zaia)
-        // Como não temos doc, vamos repetir a mensagem para destacar
+    btnFechar.addEventListener('click', () => {
+      overlay.style.display = 'none';
+    });
+
+    // Fecha chat ao clicar fora do iframe
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) {
+        overlay.style.display = 'none';
       }
-    }
+    });
 
-    function fecharChat() {
-      const overlay = document.getElementById('chat-overlay');
-      if (overlay) overlay.style.display = 'none';
-    }
-
-    // Mostrar painel humano ao digitar “suporte”
-    function mostrarPainelHumano() {
-      if (document.getElementById('painel-humano')) return;
-      const div = document.createElement('div');
-      div.id = 'painel-humano';
-      div.style.cssText = `
-        position: fixed;
-        bottom: 80px;
-        right: 20px;
-        background: #fff;
-        border: 2px solid #d9534f;
-        padding: 16px;
-        border-radius: 8px;
-        z-index: 4100;
-        max-width: 380px;
-        font-family: Arial, sans-serif;
-        color: #d9534f;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      `;
-      div.innerHTML = `<strong>Atenção:</strong> Você digitou “Suporte”. Isso fará com que você seja encaminhado visualmente para atendimento humano.`;
-      document.body.appendChild(div);
-    }
-
-    // Escuta mensagens do iframe
+    // Escuta mensagem do iframe para alertar sobre "suporte"
     window.addEventListener('message', (event) => {
-      const data = event.data;
-      if (!data) return;
-      if (data.type === 'userMessage') {
-        const texto = (data.message || '').trim().toLowerCase();
-        if (texto === 'suporte') {
-          const iframe = document.getElementById('iframe-sofia-chat');
-          if (iframe) {
-            iframe.contentWindow.postMessage({
-              type: 'sendMessage',
-              message: 'Você digitou “Suporte”. Isso fará com que você seja encaminhado visualmente para atendimento humano.'
-            }, '*');
-            mostrarPainelHumano();
-          }
+      if (!event.data) return;
+
+      if (event.data.type === 'userMessage') {
+        const msg = (event.data.message || '').toLowerCase();
+        if (msg.includes('suporte')) {
+          alert('Você digitou "Suporte". Isso fará com que você seja encaminhado visualmente para atendimento humano.');
         }
-      }
-    });
-
-    // Inicialização no DOM ready
-    window.addEventListener('DOMContentLoaded', () => {
-      inserirChat();
-    });
-
-    // Botão abrir chat vinculado
-    document.addEventListener('DOMContentLoaded', () => {
-      const btnChat = document.getElementById('btn-abrir-chat');
-      if (btnChat) {
-        btnChat.addEventListener('click', abrirChat);
       }
     });
   </script>
@@ -460,6 +383,7 @@
 
 </body>
 </html>
+
 
 
 
