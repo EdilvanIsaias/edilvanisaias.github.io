@@ -2,29 +2,9 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Kyrios Clinical Services</title>
   <link rel="stylesheet" href="style.css" />
-  <style>
-    /* Estilo simples para o botão de abrir chat */
-    #btnChat {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: #007BFF;
-      color: white;
-      border: none;
-      padding: 12px 18px;
-      border-radius: 30px;
-      cursor: pointer;
-      font-size: 16px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      z-index: 1000;
-    }
-    #btnChat:hover {
-      background-color: #0056b3;
-    }
-  </style>
 </head>
 <body>
 
@@ -33,49 +13,47 @@
       <div class="container">
         <h1>Kyrios Clinical Services</h1>
         <p>Cuidado humano com excelência, precisão e propósito.</p>
-
-        <!-- Menu topo com dropdown -->
-        <nav>
-          <ul class="menu">
-            <li>
-              Financeiro
-              <ul class="submenu">
-                <li><a href="#" onclick="abrirChat(); return false;">Planos</a></li>
-                <li><a href="#" onclick="abrirChat(); return false;">Segunda via</a></li>
-                <li><a href="#" onclick="abrirChat(); return false;">Cartão</a></li>
-              </ul>
-            </li>
-            <li>
-              Exames
-              <ul class="submenu">
-                <li><a href="#" onclick="abrirChat(); return false;">Resultado</a></li>
-                <li><a href="#" onclick="abrirChat(); return false;">Acompanhamento</a></li>
-              </ul>
-            </li>
-            <li>
-              Consultas
-              <ul class="submenu">
-                <li><a href="#" onclick="abrirChat(); return false;">Agendamento online</a></li>
-                <li><a href="#" onclick="abrirChat(); return false;">Agendamento presencial</a></li>
-              </ul>
-            </li>
-            <li>
-              Suporte técnico
-              <ul class="submenu">
-                <li><a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer">Whatsapp</a></li>
-                <li><a href="mailto:suporte@kyrios.com.br">E-mail</a></li>
-                <li><a href="#" onclick="abrirChat(); return false;">Trabalhe conosco</a></li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-
       </div>
     </div>
   </header>
 
-  <main class="container">
+  <!-- MENU NAV -->
+  <nav>
+    <ul class="menu">
+      <li>
+        Financeiro
+        <ul class="submenu">
+          <li><a href="planos.html">Planos</a></li>
+          <li><a href="segunda-via.html">Segunda via</a></li>
+          <li><a href="cartao.html">Cartão</a></li>
+        </ul>
+      </li>
+      <li>
+        Exames
+        <ul class="submenu">
+          <li><a href="resultado.html">Resultado</a></li>
+          <li><a href="acompanhamento.html">Acompanhamento</a></li>
+        </ul>
+      </li>
+      <li>
+        Consultas
+        <ul class="submenu">
+          <li><a href="#" onclick="abrirChatbot()">Agendamento online</a></li>
+          <li><a href="#" onclick="abrirChatbot()">Agendamento presencial</a></li>
+        </ul>
+      </li>
+      <li>
+        Suporte técnico
+        <ul class="submenu">
+          <li><a href="https://wa.me/seunumerodetelefone" target="_blank" rel="noopener">Whatsapp</a></li>
+          <li><a href="mailto:suporte@kyrios.com.br">E-mail</a></li>
+          <li><a href="trabalhe-conosco.html">Trabalhe conosco</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
 
+  <main class="container">
     <section class="about">
       <h2>Sobre Nós</h2>
       <p><strong>Kyrios Clinical Services</strong> nasceu com o propósito de unir excelência profissional e princípios éticos fundamentados em valores cristãos. O termo <em>Kyrios</em>, que em grego significa “Senhor”, reflete nossa inspiração em realizar um trabalho guiado por propósito, compaixão e integridade — um serviço eficiente, humano e na hora certa.</p>
@@ -83,15 +61,8 @@
     </section>
 
     <section class="agendamentos">
-      <h2>Agende sua Consulta</h2>
-      <p>Para agendamentos, utilize a <strong>Sofia</strong>, nossa assistente virtual. Ela pode ajudar você a escolher o melhor horário e tipo de atendimento.</p>
-      <!-- Retirados os botões de agendamento -->
-    </section>
-
-    <section class="calendar" id="calendar-section" style="display: none;">
-      <h2>Escolha uma data e horário</h2>
-      <p class="obs">Cada consulta tem duração média de <strong>30 minutos</strong>. Escolha um horário disponível:</p>
-      <div id="calendar-placeholder"></div>
+      <h2>Agendamentos</h2>
+      <p>Para agendamentos, utilize a Sofia, nosso <strong>chatbot</strong>, que pode ajudar você rapidamente.</p>
     </section>
 
   </main>
@@ -108,37 +79,28 @@
     </div>
   </footer>
 
-  <!-- Botão para abrir o chatbot manualmente -->
-  <button id="btnChat" onclick="abrirChat()">Falar com a Sofia</button>
-
-  <!-- Widget Zaia (chatbot) -->
+  <!-- Widget Env Script -->
   <script>
     window.ZWidget = {
-      AgentURL: "https://platform.zaia.app/embed/chat/65791", // Substitua pelo seu link real
+      AgentURL: "https://platform.zaia.app/embed/chat/65791",
     };
   </script>
-  <script src="https://platform.zaia.app/script/widget-loader.js" async></script>
+  <!-- Widget Loader Script -->
+  <script src="https://platform.zaia.app/script/widget-loader.js"></script>
 
-  <!-- Script para abrir automaticamente o chatbot ao carregar -->
   <script>
-    window.addEventListener('load', function () {
-      const interval = setInterval(() => {
-        const zaiaChatButton = document.querySelector('#zchat-button');
-        if (zaiaChatButton) {
-          zaiaChatButton.click();
-          clearInterval(interval);
-        }
-      }, 500);
-    });
-
-    function abrirChat() {
-      const zaiaChatButton = document.querySelector('#zchat-button');
-      if (zaiaChatButton) {
-        zaiaChatButton.click();
+    function abrirChatbot() {
+      if (window.ZWidget && typeof window.ZWidget.open === "function") {
+        window.ZWidget.open();
       } else {
-        alert("Chatbot não carregado. Verifique sua conexão.");
+        alert('Chatbot ainda não carregado');
       }
     }
+
+    // Abre chatbot automaticamente ao carregar a página
+    window.addEventListener('load', () => {
+      abrirChatbot();
+    });
   </script>
 
 </body>
