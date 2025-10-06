@@ -120,3 +120,77 @@ footer p {
   font-size: 0.9rem;
   text-align: center;
 }
+
+/* ----------- MENU TOPO ----------- */
+nav {
+  background-color: #013a5f;
+  padding: 10px 0;
+  font-weight: 600;
+  user-select: none;
+}
+
+nav ul.menu {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul.menu > li {
+  position: relative;
+  padding: 8px 12px;
+  cursor: pointer;
+  color: white;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  border-radius: 6px;
+}
+
+nav ul.menu > li:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+nav ul.menu > li > a {
+  color: white;
+  text-decoration: none;
+  display: block;
+}
+
+nav ul.menu > li > a:hover {
+  text-decoration: underline;
+}
+
+/* SUBMENU */
+nav ul.submenu {
+  list-style: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #024873;
+  padding: 0.5rem 0;
+  border-radius: 6px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  min-width: 180px;
+  display: none;
+  z-index: 999;
+}
+
+nav ul.submenu li {
+  padding: 10px 15px;
+  white-space: nowrap;
+  color: white;
+  font-weight: 400;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+nav ul.submenu li:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Mostrar submenu no hover do item pai */
+nav ul.menu > li:hover > ul.submenu {
+  display: block;
+}
