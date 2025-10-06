@@ -48,6 +48,11 @@
   text-decoration: none;
 }
 
+.top-menu .submenu li {
+  padding: 10px 15px;
+  color: white;
+  white-space: nowrap;
+}
 
 .top-menu .submenu li:hover {
   background-color: #046ba7;
