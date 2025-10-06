@@ -19,11 +19,11 @@ nav {
 nav ul {
   display: flex;
   list-style: none;
-  justify-content: center; /* centraliza o menu */
+  justify-content: center;
   margin: 0;
   padding: 0 2rem;
-  gap: 3.5rem; /* espaçamento horizontal entre itens aumentado */
-  font-size: 1.15rem; /* aumento da fonte */
+  gap: 3.5rem;
+  font-size: 1.15rem;
   font-weight: 600;
 }
 
