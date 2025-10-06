@@ -1,25 +1,48 @@
 <?php
-require '../includes/conexao.php';
+require 'includes/conexao.php';
 
-$email = $_POST['email'];
-$codigo = $_POST['codigo'];
+$mensagem = '';
 
-$stmt = $pdo->prepare("SELECT * FROM usuarios WHERE email = ?");
-$stmt->execute([$email]);
-$usuario = $stmt->fetch();
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = $_POST['email'] ?? '';
+    $codigo = $_POST['codigo'] ?? '';
 
-if (!$usuario) {
-  die('Usuário não encontrado');
+    $stmt = $pdo->prepare("SELECT * FROM usuarios WHERE email = ? AND codigo_verificacao = ?");
+    $stmt->execute([$email, $codigo]);
+    $usuario = $stmt->fetch();
+
+    if ($usuario && strtotime($usuario['codigo_expira_em']) >= time()) {
+        $update = $pdo->prepare("UPDATE usuarios SET verificado = 1, codigo_verificacao = NULL, codigo_expira_em = NULL WHERE id = ?");
+        $update->execute([$usuario['id']]);
+        $mensagem = "Conta verificada com sucesso!";
+    } else {
+        $mensagem = "Código inválido ou expirado.";
+    }
 }
+?>
 
-if ($usuario['verificado']) {
-  die('Conta já verificada');
-}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Verificar Conta - Kyrios</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h2>Verificação de Conta</h2>
 
-if ($usuario['codigo_verificacao'] === $codigo && strtotime($usuario['codigo_expira_em']) > time()) {
-  $stmt = $pdo->prepare("UPDATE usuarios SET verificado = 1 WHERE email = ?");
-  $stmt->execute([$email]);
-  echo 'Conta verificada com sucesso.';
-} else {
-  echo 'Código inválido ou expirado.';
-}
+  <?php if ($mensagem): ?>
+    <p><?= $mensagem ?></p>
+  <?php endif; ?>
+
+  <form method="POST" action="">
+    <label>E-mail:</label><br>
+    <input type="email" name="email" required><br><br>
+
+    <label>Código de verificação:</label><br>
+    <input type="text" name="codigo" required><br><br>
+
+    <button type="submit">Verificar</button>
+  </form>
+</body>
+</html>
