@@ -25,7 +25,7 @@
       position: relative;
     }
 
-    nav ul li a {
+    nav ul li a, .login-btn {
       color: white;
       text-decoration: none;
       padding: 10px 15px;
@@ -42,6 +42,7 @@
       top: 100%;
       background-color: #007a99;
       padding: 0;
+      z-index: 999;
     }
 
     nav ul ul li {
@@ -50,6 +51,19 @@
 
     nav ul ul li a {
       padding: 10px;
+    }
+
+    .login-btn {
+      background: none;
+      border: 1px solid white;
+      color: white;
+      padding: 8px 15px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    .login-btn:hover {
+      background-color: rgba(255,255,255,0.2);
     }
 
     /* ===== MODAL ===== */
@@ -72,10 +86,6 @@
       position: relative;
     }
 
-    .modal-content h2 {
-      margin-top: 0;
-    }
-
     .modal-content input {
       width: 100%;
       padding: 8px;
@@ -88,46 +98,33 @@
       font-size: 20px;
       cursor: pointer;
     }
-
-    .login-btn {
-      background: none;
-      border: 1px solid white;
-      color: white;
-      padding: 8px 15px;
-      cursor: pointer;
-      border-radius: 4px;
-    }
-
-    .login-btn:hover {
-      background-color: rgba(255,255,255,0.2);
-    }
   </style>
 </head>
 <body>
 
-  <!-- ===== NAVBAR COM DROPDOWNS E LOGIN ===== -->
+  <!-- ===== NAVBAR COM LINKS INTERNOS ===== -->
   <nav>
     <ul>
       <li>
         <a href="#">Financeiro</a>
         <ul>
-          <li><a href="#">Planos</a></li>
-          <li><a href="#">Segunda via</a></li>
-          <li><a href="#">Cartão</a></li>
+          <li><a href="financeiro-planos.html">Planos</a></li>
+          <li><a href="financeiro-segunda-via.html">Segunda via</a></li>
+          <li><a href="financeiro-cartao.html">Cartão</a></li>
         </ul>
       </li>
       <li>
         <a href="#">Exames</a>
         <ul>
-          <li><a href="#">Resultado</a></li>
-          <li><a href="#">Acompanhamento</a></li>
+          <li><a href="exames-resultado.html">Resultado</a></li>
+          <li><a href="exames-acompanhamento.html">Acompanhamento</a></li>
         </ul>
       </li>
       <li>
         <a href="#">Consultas</a>
         <ul>
-          <li><a href="#">Agendamento online</a></li>
-          <li><a href="#">Agendamento presencial</a></li>
+          <li><a href="consultas-online.html">Agendamento online</a></li>
+          <li><a href="consultas-presencial.html">Agendamento presencial</a></li>
         </ul>
       </li>
       <li>
@@ -135,7 +132,7 @@
         <ul>
           <li><a href="https://wa.me/5511912345678" target="_blank">WhatsApp</a></li>
           <li><a href="mailto:suporte@kyrios.com.br">E-mail</a></li>
-          <li><a href="#">Trabalhe conosco</a></li>
+          <li><a href="trabalhe-conosco.html">Trabalhe conosco</a></li>
         </ul>
       </li>
       <li>
@@ -181,7 +178,7 @@
     </div>
   </header>
 
-  <!-- WIDGET ZAIA -->
+  <!-- ZAIA WIDGET -->
   <script>
     window.ZWidget = {
       AgentURL: "https://platform.zaia.app/embed/chat/65791",
@@ -189,9 +186,40 @@
   </script>
   <script src="https://platform.zaia.app/script/widget-loader.js"></script>
 
-  <!-- RESTANTE DO CONTEÚDO (MANTIDO) -->
+  <!-- CONTEÚDO ORIGINAL MANTIDO -->
   <main class="container">
-    <!-- ... Seu conteúdo de "Sobre Nós", "Agendamentos", etc. permanece aqui ... -->
+    <section class="about">
+      <h2>Sobre Nós</h2>
+      <p><strong>Kyrios Clinical Services</strong> nasceu com o propósito de unir excelência profissional e princípios éticos fundamentados em valores cristãos. O termo <em>Kyrios</em>, que em grego significa “Senhor”, reflete nossa inspiração em realizar um trabalho guiado por propósito, compaixão e integridade — um serviço eficiente, humano e na hora certa.</p>
+      <p>Não somos uma instituição confessional, mas nossa filosofia se baseia em fundamentos teológicos e morais amplos do cristianismo protestante, que inspiram cada aspecto do nosso atendimento: respeito, responsabilidade e cuidado genuíno com o próximo.</p>
+    </section>
+
+    <section class="agendamentos">
+      <h2>Agende sua Consulta</h2>
+      <div class="cards">
+        <div class="card">
+          <img src="images/presencial.jpg" alt="Consulta Presencial" />
+          <h3>Consulta Presencial</h3>
+          <p>Atendimento em nosso consultório com equipe especializada.</p>
+          <p><strong>Local:</strong> Rua da Saúde, 123 - São Paulo - SP</p>
+          <button onclick="abrirAgendamento('presencial')">Agendar</button>
+        </div>
+
+        <div class="card">
+          <img src="images/online.jpg" alt="Consulta Online" />
+          <h3>Consulta Online</h3>
+          <p>Atendimento via videochamada. Praticidade e conforto para você.</p>
+          <p><strong>Email:</strong> online@kyrios.com.br</p>
+          <button onclick="abrirAgendamento('online')">Agendar</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="calendar" id="calendar-section" style="display: none;">
+      <h2>Escolha uma data e horário</h2>
+      <p class="obs">Cada consulta tem duração média de <strong>30 minutos</strong>. Escolha um horário disponível:</p>
+      <div id="calendar-placeholder"></div>
+    </section>
   </main>
 
   <footer>
@@ -208,7 +236,7 @@
 
   <script src="calendar.js"></script>
 
-  <!-- Scripts para modal -->
+  <!-- Script para modais -->
   <script>
     function abrirLogin() {
       document.getElementById('modal-login').style.display = 'flex';
@@ -223,7 +251,6 @@
       document.getElementById(id).style.display = 'none';
     }
 
-    // Fechar modal ao clicar fora
     window.onclick = function(event) {
       if (event.target.classList.contains('modal')) {
         event.target.style.display = 'none';
