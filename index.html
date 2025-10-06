@@ -2,9 +2,19 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kyrios Clinical Services</title>
   <link rel="stylesheet" href="style.css" />
+  <script>
+    // Função para abrir chatbot da Zaia
+    function abrirChatbot() {
+      if(window.ZWidget && window.ZWidget.open) {
+        window.ZWidget.open();
+      } else {
+        alert("Chatbot não está carregado ainda.");
+      }
+    }
+  </script>
 </head>
 <body>
 
@@ -17,7 +27,7 @@
     </div>
   </header>
 
-  <!-- MENU NAV -->
+  <!-- Menu principal -->
   <nav>
     <ul class="menu">
       <li>
@@ -62,9 +72,8 @@
 
     <section class="agendamentos">
       <h2>Agendamentos</h2>
-      <p>Para agendamentos, utilize a Sofia, nosso <strong>chatbot</strong>, que pode ajudar você rapidamente.</p>
+      <p>Para agendamentos, utilize <strong>A Sofia [chatbot]</strong>.</p>
     </section>
-
   </main>
 
   <footer>
@@ -83,25 +92,14 @@
   <script>
     window.ZWidget = {
       AgentURL: "https://platform.zaia.app/embed/chat/65791",
+      onLoad: () => {
+        // Abrir chatbot automaticamente no carregamento da página
+        window.ZWidget.open();
+      }
     };
   </script>
   <!-- Widget Loader Script -->
   <script src="https://platform.zaia.app/script/widget-loader.js"></script>
-
-  <script>
-    function abrirChatbot() {
-      if (window.ZWidget && typeof window.ZWidget.open === "function") {
-        window.ZWidget.open();
-      } else {
-        alert('Chatbot ainda não carregado');
-      }
-    }
-
-    // Abre chatbot automaticamente ao carregar a página
-    window.addEventListener('load', () => {
-      abrirChatbot();
-    });
-  </script>
 
 </body>
 </html>
