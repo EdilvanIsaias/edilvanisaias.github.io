@@ -2,62 +2,12 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kyrios Clinical Services</title>
   <link rel="stylesheet" href="style.css" />
-  <script>
-    // Função para abrir chatbot da Zaia
-    function abrirChatbot() {
-      if(window.ZWidget && window.ZWidget.open) {
-        window.ZWidget.open();
-      } else {
-        alert("Chatbot não está carregado ainda.");
-      }
-    }
-  </script>
 </head>
 <body>
 
-  <!-- Menu fixo no topo -->
-  <nav class="top-menu">
-    <ul class="menu">
-      <li>
-        Financeiro
-        <ul class="submenu">
-          <li><a href="planos.html">Planos</a></li>
-          <li><a href="segunda-via.html">Segunda via</a></li>
-          <li><a href="cartao.html">Cartão</a></li>
-        </ul>
-      </li>
-      <li>
-        Exames
-        <ul class="submenu">
-          <li><a href="resultado.html">Resultado</a></li>
-          <li><a href="acompanhamento.html">Acompanhamento</a></li>
-        </ul>
-      </li>
-      <li>
-        Consultas
-        <ul class="submenu">
-          <li><a href="#" onclick="abrirChatbot()">Agendamento online</a></li>
-          <li><a href="#" onclick="abrirChatbot()">Agendamento presencial</a></li>
-        </ul>
-      </li>
-      <li>
-        Suporte técnico
-        <ul class="submenu">
-          <li><a href="https://wa.me/seunumerodetelefone" target="_blank" rel="noopener">Whatsapp</a></li>
-          <li><a href="mailto:suporte@kyrios.com.br">E-mail</a></li>
-          <li><a href="trabalhe-conosco.html">Trabalhe conosco</a></li>
-        </ul>
-      </li>
-      <li class="login-menu">
-        <button onclick="location.href='login.html'">Login</button>
-      </li>
-    </ul>
-  </nav>
-
-  <!-- Cabeçalho abaixo do menu -->
   <header>
     <div class="overlay">
       <div class="container">
@@ -66,6 +16,46 @@
       </div>
     </div>
   </header>
+
+  <!-- MENU TOPO -->
+  <nav class="top-menu">
+    <div class="container">
+      <ul class="menu">
+        <li>
+          <a href="#">Financeiro</a>
+          <ul class="submenu">
+            <li><a href="financeiro-planos.html" onclick="abrirChatbot()">Planos</a></li>
+            <li><a href="financeiro-segundavia.html" onclick="abrirChatbot()">Segunda via</a></li>
+            <li><a href="financeiro-cartao.html" onclick="abrirChatbot()">Cartão</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#">Exames</a>
+          <ul class="submenu">
+            <li><a href="exames-resultado.html" onclick="abrirChatbot()">Resultado</a></li>
+            <li><a href="exames-acompanhamento.html" onclick="abrirChatbot()">Acompanhamento</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#">Consultas</a>
+          <ul class="submenu">
+            <li><a href="#" onclick="abrirChatbot()">Agendamento online</a></li>
+            <li><a href="#" onclick="abrirChatbot()">Agendamento presencial</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#">Suporte Técnico</a>
+          <ul class="submenu">
+            <li><a href="https://wa.me/5511912345678" target="_blank">Whatsapp</a></li>
+            <li><a href="mailto:suporte@kyrios.com.br">E-mail</a></li>
+            <li><a href="trabalhe-conosco.html">Trabalhe conosco</a></li>
+          </ul>
+        </li>
+      </ul>
+
+      <button class="login-btn" onclick="abrirLogin()">Login</button>
+    </div>
+  </nav>
 
   <main class="container">
     <section class="about">
@@ -76,7 +66,7 @@
 
     <section class="agendamentos">
       <h2>Agendamentos</h2>
-      <p>Para agendamentos, utilize <strong>A Sofia [chatbot]</strong>.</p>
+      <p>Para agendamentos, utilize <strong>A Sofia - Agente Virtual</strong>.</p>
     </section>
   </main>
 
@@ -95,15 +85,29 @@
   <!-- Widget Env Script -->
   <script>
     window.ZWidget = {
-      AgentURL: "https://platform.zaia.app/embed/chat/65791",
-      onLoad: () => {
-        // Abrir chatbot automaticamente no carregamento da página
-        window.ZWidget.open();
-      }
+      AgentURL: "https://platform.zaia.app/embed/chat/65791"
     };
+
+    function abrirChatbot() {
+      if(window.ZWidget && window.ZWidget.open) {
+        window.ZWidget.open();
+      } else {
+        console.log("Chat ainda não carregado");
+      }
+    }
+
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        abrirChatbot();
+      }, 1000);
+    });
+
+    function abrirLogin() {
+      // Coloque aqui a lógica para abrir a tela de login ou redirecionar para a página de login
+      alert('Abrir tela de login (implemente aqui)');
+    }
   </script>
   <!-- Widget Loader Script -->
   <script src="https://platform.zaia.app/script/widget-loader.js"></script>
-
 </body>
 </html>
