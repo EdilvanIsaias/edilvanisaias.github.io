@@ -15,108 +15,13 @@ header {
   height: 70vh;
 }
 
-header .overlay {
+header .container {
   background-color: rgba(0, 0, 0, 0.5);
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-}
-
-/* ---------- TOPO MENU ---------- */
-.top-menu {
-  background-color: #024873;
-  padding: 10px 0;
-  color: white;
-  font-family: 'Segoe UI', sans-serif;
-  font-weight: 600;
-  font-size: 1rem;
-}
-
-.top-menu .container {
-  max-width: 960px;
-  margin: auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.top-menu .menu {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  gap: 50px; /* espaçamento maior entre itens */
-}
-
-.top-menu .menu > li {
-  position: relative;
-  cursor: pointer;
-}
-
-.top-menu .menu > li > a {
-  color: white !important;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 1rem;
-  transition: color 0.3s ease;
-}
-
-.top-menu .menu > li > a:hover {
-  color: #90caf9; /* leve destaque ao passar o mouse */
-}
-
-/* Submenu */
-.top-menu .submenu {
-  display: none;
-  position: absolute;
-  background-color: #046ba7;
-  top: 100%;
-  left: 0;
-  padding: 10px 0;
-  border-radius: 0 0 8px 8px;
-  min-width: 180px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-  z-index: 100;
-}
-
-.top-menu .submenu li {
-  padding: 8px 20px;
-}
-
-.top-menu .submenu li a {
-  color: white !important;
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 0.95rem;
-  display: block;
-}
-
-.top-menu .submenu li a:hover {
-  background-color: #024873;
-}
-
-/* Mostrar submenu ao passar o mouse */
-.top-menu .menu > li:hover .submenu {
-  display: block;
-}
-
-/* Botão login */
-.top-menu .login-btn {
-  border: 1px solid white;
-  padding: 6px 15px;
-  border-radius: 6px;
-  background: transparent;
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.top-menu .login-btn:hover {
-  background-color: white;
-  color: #024873;
 }
 
 /* ---------- CONTAINER ---------- */
@@ -126,10 +31,84 @@ header .overlay {
   padding: 2rem;
 }
 
+/* ---------- MENU ---------- */
+.main-menu {
+  background-color: #004a70;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.main-menu ul {
+  margin: 0;
+  padding: 0 2rem;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3.5rem; /* Espaçamento maior */
+  height: 50px;
+}
+
+.main-menu ul li {
+  position: relative;
+  color: white;
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.main-menu ul li:hover > ul.submenu {
+  display: block;
+}
+
+.main-menu ul li button#login-btn {
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.main-menu ul li button#login-btn:hover {
+  background-color: white;
+  color: #004a70;
+}
+
+/* Submenu */
+.submenu {
+  display: none;
+  position: absolute;
+  top: 50px;
+  left: 0;
+  background-color: #036;
+  border-radius: 0 0 6px 6px;
+  padding: 0.7rem 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  min-width: 180px;
+  z-index: 999;
+}
+
+.submenu li {
+  color: white;
+  padding: 0.3rem 0;
+}
+
+.submenu li a {
+  color: white;
+  text-decoration: none;
+  font-weight: normal;
+  font-size: 0.95rem;
+}
+
+.submenu li a:hover {
+  text-decoration: underline;
+}
+
 /* ---------- SEÇÕES ---------- */
 .about,
-.agendamentos,
-.calendar {
+.agendamentos {
   margin-top: 3rem;
   background: white url('images/texture-bg.jpg') center/cover no-repeat;
   padding: 2rem;
@@ -137,74 +116,21 @@ header .overlay {
   box-shadow: 0 0 15px rgba(0,0,0,0.05);
 }
 
-/* ---------- CARDS ---------- */
-.cards {
-  display: flex;
-  gap: 2rem;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.card {
-  background-color: rgba(255,255,255,0.9);
-  border-radius: 10px;
-  padding: 1rem;
-  flex: 1 1 300px;
-  max-width: 400px;
-  text-align: center;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-}
-
-.card img {
-  max-width: 100%;
-  border-radius: 10px;
-  margin-bottom: 1rem;
-}
-
-.card button {
-  margin-top: 1rem;
-  background-color: #198754;
-  color: white;
-  padding: 0.8rem 1.5rem;
-  border: none;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.card button:hover {
-  background-color: #157347;
-}
-
-/* ---------- CALENDÁRIO ---------- */
-.calendar h2 {
-  margin-bottom: 0.5rem;
-}
-
-.obs {
-  margin-bottom: 1.5rem;
-  font-style: italic;
-}
-
-#calendar-placeholder {
-  display: grid;
-  gap: 1rem;
-}
-
 /* ---------- FOOTER ---------- */
 footer {
-  background-color: #024873;
+  background: linear-gradient(to top, #013a5f, #046ba7);
   color: white;
   padding: 3rem 2rem;
   margin-top: 4rem;
-  background: linear-gradient(to top, #013a5f, #046ba7);
 }
 
 footer ul {
   list-style: none;
   padding: 0;
   margin-bottom: 1rem;
+  max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 footer li {
