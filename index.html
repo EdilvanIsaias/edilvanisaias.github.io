@@ -20,11 +20,11 @@
     nav ul {
       display: flex;
       list-style: none;
-      justify-content: center; /* centraliza o menu */
+      justify-content: center;
       margin: 0;
       padding: 0 2rem;
-      gap: 3.5rem; /* espaçamento horizontal entre itens aumentado */
-      font-size: 1.15rem; /* aumento da fonte */
+      gap: 3.5rem;
+      font-size: 1.15rem;
       font-weight: 600;
     }
 
@@ -263,10 +263,11 @@
       </div>
     </section>
 
+    <!-- SEÇÃO ATUALIZADA DE CALENDÁRIO -->
     <section class="calendar" id="calendar-section" style="display: none;">
-      <h2>Escolha uma data e horário</h2>
-      <p class="obs">Cada consulta tem duração média de <strong>30 minutos</strong>. Escolha um horário disponível:</p>
-      <div id="calendar-placeholder"></div>
+      <h2>Converse com Sofia</h2>
+      <p class="obs">Nossa assistente pode ajudá-lo a agendar uma consulta:</p>
+      <button onclick="window.ZWidget.open()">Conversar com Sofia</button>
     </section>
   </main>
 
@@ -303,6 +304,20 @@
       if (event.target.classList.contains('modal')) {
         event.target.style.display = 'none';
       }
+    }
+
+    function abrirAgendamento(tipo) {
+      const mensagem = `Olá, Sofia! Gostaria de agendar uma consulta ${tipo === 'presencial' ? 'presencial' : 'online'}.`;
+      
+      if (window.ZWidget && typeof window.ZWidget.open === 'function') {
+        window.ZWidget.open();
+      }
+
+      if (window.ZWidget && typeof window.ZWidget.sendMessage === 'function') {
+        window.ZWidget.sendMessage(mensagem);
+      }
+
+      document.getElementById('calendar-section').style.display = 'block';
     }
   </script>
 </body>
