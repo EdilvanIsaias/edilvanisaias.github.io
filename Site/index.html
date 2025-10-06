@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kyrios Clinical Services</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* ===== NAVBAR ===== */
+    nav {
+      background-color: #004d66;
+      padding: 10px 0;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      justify-content: space-around;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li {
+      position: relative;
+    }
+
+    nav ul li a, .login-btn {
+      color: white;
+      text-decoration: none;
+      padding: 10px 15px;
+      display: block;
+    }
+
+    nav ul li:hover > ul {
+      display: block;
+    }
+
+    nav ul ul {
+      display: none;
+      position: absolute;
+      top: 100%;
+      background-color: #007a99;
+      padding: 0;
+      z-index: 999;
+    }
+
+    nav ul ul li {
+      width: 200px;
+    }
+
+    nav ul ul li a {
+      padding: 10px;
+    }
+
+    .login-btn {
+      background: none;
+      border: 1px solid white;
+      color: white;
+      padding: 8px 15px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    .login-btn:hover {
+      background-color: rgba(255,255,255,0.2);
+    }
+
+    /* ===== MODAL ===== */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: #fff;
+      padding: 20px;
+      width: 400px;
+      border-radius: 5px;
+      position: relative;
+    }
+
+    .modal-content input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+    }
+
+    .close {
+      position: absolute;
+      top: 10px; right: 15px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVBAR COM LINKS INTERNOS ===== -->
+  <nav>
+    <ul>
+      <li>
+        <a href="#">Financeiro</a>
+        <ul>
+          <li><a href="financeiro-planos.html">Planos</a></li>
+          <li><a href="financeiro-segunda-via.html">Segunda via</a></li>
+          <li><a href="financeiro-cartao.html">Cartão</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">Exames</a>
+        <ul>
+          <li><a href="exames-resultado.html">Resultado</a></li>
+          <li><a href="exames-acompanhamento.html">Acompanhamento</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">Consultas</a>
+        <ul>
+          <li><a href="consultas-online.html">Agendamento online</a></li>
+          <li><a href="consultas-presencial.html">Agendamento presencial</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">Suporte Técnico</a>
+        <ul>
+          <li><a href="https://wa.me/5511912345678" target="_blank">WhatsApp</a></li>
+          <li><a href="mailto:suporte@kyrios.com.br">E-mail</a></li>
+          <li><a href="trabalhe-conosco.html">Trabalhe conosco</a></li>
+        </ul>
+      </li>
+      <li>
+        <button class="login-btn" onclick="abrirLogin()">Login</button>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- ===== MODAL DE LOGIN ===== -->
+  <div class="modal" id="modal-login">
+    <div class="modal-content">
+      <span class="close" onclick="fecharModal('modal-login')">&times;</span>
+      <h2>Login</h2>
+      <input type="email" placeholder="E-mail" />
+      <input type="password" placeholder="Senha" />
+      <button>Entrar</button>
+      <p>Não tem conta? <a href="#" onclick="abrirCadastro()">Cadastre-se</a></p>
+    </div>
+  </div>
+
+  <!-- ===== MODAL DE CADASTRO ===== -->
+  <div class="modal" id="modal-cadastro">
+    <div class="modal-content">
+      <span class="close" onclick="fecharModal('modal-cadastro')">&times;</span>
+      <h2>Cadastro</h2>
+      <input type="text" placeholder="Nome completo" />
+      <input type="text" placeholder="CPF" />
+      <input type="email" placeholder="E-mail" />
+      <input type="tel" placeholder="Telefone celular" />
+      <input type="text" placeholder="Endereço completo" />
+      <input type="password" placeholder="Senha" />
+      <button>Cadastrar</button>
+    </div>
+  </div>
+
+  <!-- ===== HEADER ORIGINAL ===== -->
+  <header>
+    <div class="overlay">
+      <div class="container">
+        <h1>Kyrios Clinical Services</h1>
+        <p>Cuidado humano com excelência, precisão e propósito.</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ZAIA WIDGET -->
+  <script>
+    window.ZWidget = {
+      AgentURL: "https://platform.zaia.app/embed/chat/65791",
+    };
+  </script>
+  <script src="https://platform.zaia.app/script/widget-loader.js"></script>
+
+  <!-- CONTEÚDO ORIGINAL MANTIDO -->
+  <main class="container">
+    <section class="about">
+      <h2>Sobre Nós</h2>
+      <p><strong>Kyrios Clinical Services</strong> nasceu com o propósito de unir excelência profissional e princípios éticos fundamentados em valores cristãos. O termo <em>Kyrios</em>, que em grego significa “Senhor”, reflete nossa inspiração em realizar um trabalho guiado por propósito, compaixão e integridade — um serviço eficiente, humano e na hora certa.</p>
+      <p>Não somos uma instituição confessional, mas nossa filosofia se baseia em fundamentos teológicos e morais amplos do cristianismo protestante, que inspiram cada aspecto do nosso atendimento: respeito, responsabilidade e cuidado genuíno com o próximo.</p>
+    </section>
+
+    <section class="agendamentos">
+      <h2>Agende sua Consulta</h2>
+      <div class="cards">
+        <div class="card">
+          <img src="images/presencial.jpg" alt="Consulta Presencial" />
+          <h3>Consulta Presencial</h3>
+          <p>Atendimento em nosso consultório com equipe especializada.</p>
+          <p><strong>Local:</strong> Rua da Saúde, 123 - São Paulo - SP</p>
+          <button onclick="abrirAgendamento('presencial')">Agendar</button>
+        </div>
+
+        <div class="card">
+          <img src="images/online.jpg" alt="Consulta Online" />
+          <h3>Consulta Online</h3>
+          <p>Atendimento via videochamada. Praticidade e conforto para você.</p>
+          <p><strong>Email:</strong> online@kyrios.com.br</p>
+          <button onclick="abrirAgendamento('online')">Agendar</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="calendar" id="calendar-section" style="display: none;">
+      <h2>Escolha uma data e horário</h2>
+      <p class="obs">Cada consulta tem duração média de <strong>30 minutos</strong>. Escolha um horário disponível:</p>
+      <div id="calendar-placeholder"></div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <h3>Suporte e Contato</h3>
+      <ul>
+        <li><strong>Telefone:</strong> (11) 91234-5678</li>
+        <li><strong>Email:</strong> suporte@kyrios.com.br</li>
+        <li><strong>Endereço:</strong> Rua da Saúde, 123 - São Paulo - SP</li>
+      </ul>
+      <p>&copy; 2025 Kyrios Clinical Services. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="calendar.js"></script>
+
+  <!-- Script para modais -->
+  <script>
+    function abrirLogin() {
+      document.getElementById('modal-login').style.display = 'flex';
+    }
+
+    function abrirCadastro() {
+      document.getElementById('modal-login').style.display = 'none';
+      document.getElementById('modal-cadastro').style.display = 'flex';
+    }
+
+    function fecharModal(id) {
+      document.getElementById(id).style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+      if (event.target.classList.contains('modal')) {
+        event.target.style.display = 'none';
+      }
+    }
+  </script>
+</body>
+</html>
