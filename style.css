@@ -6,35 +6,13 @@ body {
   line-height: 1.6;
 }
 
-/* ---------- HEADER ---------- */
-header {
-  background: url('images/header-bg.jpg') center/cover no-repeat;
-  color: white;
-  text-align: center;
-  position: relative;
-  height: 70vh;
-}
-
-header .container {
-  background-color: rgba(0, 0, 0, 0.5);
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-/* ---------- CONTAINER ---------- */
-.container {
-  max-width: 960px;
-  margin: auto;
-  padding: 2rem;
-}
-
 /* ---------- MENU ---------- */
 .main-menu {
   background-color: #004a70;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .main-menu ul {
@@ -44,16 +22,17 @@ header .container {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 3.5rem; /* Espaçamento maior */
-  height: 50px;
+  gap: 4.5rem; /* Mais espaçamento entre os itens */
+  height: 55px;
+  font-size: 1.15rem; /* Fonte maior */
+  font-weight: 600;
 }
 
 .main-menu ul li {
   position: relative;
   color: white;
-  font-weight: 500;
-  font-size: 1rem;
   cursor: pointer;
+  user-select: none;
 }
 
 .main-menu ul li:hover > ul.submenu {
@@ -66,7 +45,8 @@ header .container {
   color: white;
   padding: 6px 14px;
   border-radius: 4px;
-  font-weight: 500;
+  font-weight: 600;
+  font-size: 1.15rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
@@ -80,7 +60,7 @@ header .container {
 .submenu {
   display: none;
   position: absolute;
-  top: 50px;
+  top: 55px;
   left: 0;
   background-color: #036;
   border-radius: 0 0 6px 6px;
@@ -99,11 +79,37 @@ header .container {
   color: white;
   text-decoration: none;
   font-weight: normal;
-  font-size: 0.95rem;
+  font-size: 1rem;
 }
 
 .submenu li a:hover {
   text-decoration: underline;
+}
+
+/* ---------- HEADER ---------- */
+header {
+  background: url('images/header-bg.jpg') center/cover no-repeat;
+  color: white;
+  text-align: center;
+  position: relative;
+  height: 70vh;
+  padding-top: 1rem;
+}
+
+header .container {
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* ---------- CONTAINER ---------- */
+.container {
+  max-width: 960px;
+  margin: auto;
+  padding: 2rem;
 }
 
 /* ---------- SEÇÕES ---------- */
