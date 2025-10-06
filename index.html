@@ -2,59 +2,53 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Kyrios Clinical Services</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
   <header>
-    <div class="overlay">
-      <div class="container">
-        <h1>Kyrios Clinical Services</h1>
-        <p>Cuidado humano com excelência, precisão e propósito.</p>
-      </div>
+    <div class="container">
+      <h1>Kyrios Clinical Services</h1>
+      <p>Cuidado humano com excelência, precisão e propósito.</p>
     </div>
   </header>
 
-  <!-- MENU TOPO -->
-  <nav class="top-menu">
-    <div class="container">
-      <ul class="menu">
-        <li>
-          <a href="#">Financeiro</a>
-          <ul class="submenu">
-            <li><a href="financeiro-planos.html" onclick="abrirChatbot()">Planos</a></li>
-            <li><a href="financeiro-segundavia.html" onclick="abrirChatbot()">Segunda via</a></li>
-            <li><a href="financeiro-cartao.html" onclick="abrirChatbot()">Cartão</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href="#">Exames</a>
-          <ul class="submenu">
-            <li><a href="exames-resultado.html" onclick="abrirChatbot()">Resultado</a></li>
-            <li><a href="exames-acompanhamento.html" onclick="abrirChatbot()">Acompanhamento</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href="#">Consultas</a>
-          <ul class="submenu">
-            <li><a href="#" onclick="abrirChatbot()">Agendamento online</a></li>
-            <li><a href="#" onclick="abrirChatbot()">Agendamento presencial</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href="#">Suporte Técnico</a>
-          <ul class="submenu">
-            <li><a href="https://wa.me/5511912345678" target="_blank">Whatsapp</a></li>
-            <li><a href="mailto:suporte@kyrios.com.br">E-mail</a></li>
-            <li><a href="trabalhe-conosco.html">Trabalhe conosco</a></li>
-          </ul>
-        </li>
-      </ul>
-
-      <button class="login-btn" onclick="abrirLogin()">Login</button>
-    </div>
+  <nav class="main-menu">
+    <ul>
+      <li>
+        Financeiro
+        <ul class="submenu">
+          <li><a href="#" onclick="abrirChat('Planos')">Planos</a></li>
+          <li><a href="#" onclick="abrirChat('Segunda via')">Segunda via</a></li>
+          <li><a href="#" onclick="abrirChat('Cartão')">Cartão</a></li>
+        </ul>
+      </li>
+      <li>
+        Exames
+        <ul class="submenu">
+          <li><a href="#" onclick="abrirChat('Resultado')">Resultado</a></li>
+          <li><a href="#" onclick="abrirChat('Acompanhamento')">Acompanhamento</a></li>
+        </ul>
+      </li>
+      <li>
+        Consultas
+        <ul class="submenu">
+          <li><a href="#" onclick="abrirChat('Agendamento online')">Agendamento online</a></li>
+          <li><a href="#" onclick="abrirChat('Agendamento presencial')">Agendamento presencial</a></li>
+        </ul>
+      </li>
+      <li>
+        Suporte Técnico
+        <ul class="submenu">
+          <li><a href="#" onclick="abrirChat('Whatsapp')">Whatsapp</a></li>
+          <li><a href="#" onclick="abrirChat('E-mail')">E-mail</a></li>
+          <li><a href="#" onclick="abrirChat('Trabalhe conosco')">Trabalhe conosco</a></li>
+        </ul>
+      </li>
+      <li><button id="login-btn">Login</button></li>
+    </ul>
   </nav>
 
   <main class="container">
@@ -66,7 +60,7 @@
 
     <section class="agendamentos">
       <h2>Agendamentos</h2>
-      <p>Para agendamentos, utilize <strong>A Sofia - Agente Virtual</strong>.</p>
+      <p>Para agendamentos, utilize a Agente Virtual Sofia.</p>
     </section>
   </main>
 
@@ -82,32 +76,27 @@
     </div>
   </footer>
 
-  <!-- Widget Env Script -->
+  <!-- Widget Env Script Zaia -->
   <script>
     window.ZWidget = {
-      AgentURL: "https://platform.zaia.app/embed/chat/65791"
+      AgentURL: "https://platform.zaia.app/embed/chat/65791",
+      openOnLoad: true
     };
-
-    function abrirChatbot() {
-      if(window.ZWidget && window.ZWidget.open) {
-        window.ZWidget.open();
+    // Função para abrir chat e enviar mensagem inicial
+    function abrirChat(mensagem) {
+      if (window.ZWidget && window.ZWidget.openChat) {
+        window.ZWidget.openChat();
+        // Supondo que a API do chatbot permita enviar mensagem programaticamente:
+        // (Isso depende da API do Zaia, ajuste conforme necessário)
+        setTimeout(() => {
+          window.ZWidget.sendMessage && window.ZWidget.sendMessage(mensagem);
+        }, 500);
       } else {
-        console.log("Chat ainda não carregado");
+        alert('Chat não disponível no momento.');
       }
     }
-
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        abrirChatbot();
-      }, 1000);
-    });
-
-    function abrirLogin() {
-      // Coloque aqui a lógica para abrir a tela de login ou redirecionar para a página de login
-      alert('Abrir tela de login (implemente aqui)');
-    }
   </script>
-  <!-- Widget Loader Script -->
   <script src="https://platform.zaia.app/script/widget-loader.js"></script>
+
 </body>
 </html>
