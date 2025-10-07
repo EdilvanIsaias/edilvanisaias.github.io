@@ -149,10 +149,88 @@
   </style>
 </head>
 <body>
-  <!-- … seu conteúdo de navbar, modais, header etc permanecem … -->
+  <!-- ===== NAVBAR ===== -->
+  <nav>
+    <ul>
+      <li>
+        <a href="#">Financeiro</a>
+        <ul>
+          <li><a href="financeiro-planos.html">Planos</a></li>
+          <li><a href="financeiro-segunda-via.html">Segunda via</a></li>
+          <li><a href="financeiro-cartao.html">Cartão</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">Exames</a>
+        <ul>
+          <li><a href="exames-resultado.html">Resultado</a></li>
+          <li><a href="exames-acompanhamento.html">Acompanhamento</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">Consultas</a>
+        <ul>
+          <li><a href="consultas-online.html">Agendamento online</a></li>
+          <li><a href="consultas-presencial.html">Agendamento presencial</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">Suporte Técnico</a>
+        <ul>
+          <li><a href="https://wa.me/5511912345678" target="_blank">WhatsApp</a></li>
+          <li><a href="mailto:suporte@kyrios.com.br">E-mail</a></li>
+          <li><a href="trabalhe-conosco.html">Trabalhe conosco</a></li>
+        </ul>
+      </li>
+      <li>
+        <button class="login-btn" onclick="abrirLogin()">Login</button>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- ===== MODAIS ===== -->
+  <div class="modal" id="modal-login">
+    <div class="modal-content">
+      <span class="close" onclick="fecharModal('modal-login')">&times;</span>
+      <h2>Login</h2>
+      <input type="email" placeholder="E-mail" />
+      <input type="password" placeholder="Senha" />
+      <button>Entrar</button>
+      <p>Não tem conta? <a href="#" onclick="abrirCadastro()">Cadastre-se</a></p>
+    </div>
+  </div>
+
+  <div class="modal" id="modal-cadastro">
+    <div class="modal-content">
+      <span class="close" onclick="fecharModal('modal-cadastro')">&times;</span>
+      <h2>Cadastro</h2>
+      <input type="text" placeholder="Nome completo" />
+      <input type="text" placeholder="CPF" />
+      <input type="email" placeholder="E-mail" />
+      <input type="tel" placeholder="Telefone celular" />
+      <input type="text" placeholder="Endereço completo" />
+      <input type="password" placeholder="Senha" />
+      <button>Cadastrar</button>
+    </div>
+  </div>
+
+  <!-- ===== HEADER ===== -->
+  <header>
+    <div class="overlay">
+      <div class="container">
+        <h1>Kyrios Clinical Services</h1>
+        <p>Cuidado humano com excelência, precisão e propósito.</p>
+      </div>
+    </div>
+  </header>
 
   <main class="container">
-    <section class="about"> … </section>
+    <section class="about">
+      <h2>Sobre Nós</h2>
+      <p><strong>Kyrios Clinical Services</strong> nasceu com o propósito de unir excelência profissional e princípios éticos fundamentados em valores cristãos.</p>
+      <p>Não somos uma instituição confessional, mas nossa filosofia se baseia em fundamentos teológicos e morais amplos do cristianismo protestante.</p>
+    </section>
+
     <section class="agendamentos">
       <h2>Agende sua Consulta</h2>
       <div class="cards">
@@ -163,6 +241,7 @@
           <p><strong>Local:</strong> Rua da Saúde, 123 - São Paulo - SP</p>
           <button class="btn-agendar">Agendar</button>
         </div>
+
         <div class="card">
           <img src="images/online.jpg" alt="Consulta Online" />
           <h3>Consulta Online</h3>
@@ -180,26 +259,19 @@
     </section>
   </main>
 
-  <footer> … </footer>
+  <footer>
+    <div class="container">
+      <h3>Suporte e Contato</h3>
+      <ul>
+        <li><strong>Telefone:</strong> (11) 91234-5678</li>
+        <li><strong>Email:</strong> suporte@kyrios.com.br</li>
+        <li><strong>Endereço:</strong> Rua da Saúde, 123 - São Paulo - SP</li>
+      </ul>
+      <p>&copy; 2025 Kyrios Clinical Services. Todos os direitos reservados.</p>
+    </div>
+  </footer>
 
-  <script src="calendar.js"></script>
-
-  <!-- Script dos modais permanece igual -->
-  <script>
-    function abrirLogin() { document.getElementById('modal-login').style.display = 'flex'; }
-    function abrirCadastro() {
-      document.getElementById('modal-login').style.display = 'none';
-      document.getElementById('modal-cadastro').style.display = 'flex';
-    }
-    function fecharModal(id) { document.getElementById(id).style.display = 'none'; }
-    window.onclick = function(event) {
-      if (event.target.classList.contains('modal')) {
-        event.target.style.display = 'none';
-      }
-    };
-  </script>
-
-  <!-- Zaia widget scripts (este bloco deve vir antes do controle) -->
+  <!-- ZAIA CHATBOT WIDGET -->
   <script>
     window.ZWidget = {
       AgentURL: "https://platform.zaia.app/embed/chat/65791"
@@ -207,12 +279,27 @@
   </script>
   <script src="https://platform.zaia.app/script/widget-loader.js"></script>
 
-  <!-- Script extra de controle (abre chat, envia mensagem inicial, associa botões) -->
+  <!-- SCRIPTS PERSONALIZADOS -->
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    function abrirLogin() {
+      document.getElementById('modal-login').style.display = 'flex';
+    }
+    function abrirCadastro() {
+      document.getElementById('modal-login').style.display = 'none';
+      document.getElementById('modal-cadastro').style.display = 'flex';
+    }
+    function fecharModal(id) {
+      document.getElementById(id).style.display = 'none';
+    }
+    window.onclick = function(event) {
+      if (event.target.classList.contains('modal')) {
+        event.target.style.display = 'none';
+      }
+    };
 
+    // Abre chat da Sofia com mensagem inicial
+    document.addEventListener('DOMContentLoaded', () => {
       function abrirChatComTextoInicial() {
-        // Só tenta se ZWidget existir
         if (window.ZWidget && typeof window.ZWidget.open === 'function') {
           window.ZWidget.open();
         }
@@ -223,21 +310,16 @@
         }
       }
 
-      // Atrelando a ação dos botões de agendar
-      const btns = document.querySelectorAll('.btn-agendar');
-      btns.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          e.preventDefault();
-          abrirChatComTextoInicial();
-        });
+      document.querySelectorAll('.btn-agendar').forEach(btn => {
+        btn.addEventListener('click', abrirChatComTextoInicial);
       });
-
     });
   </script>
-
 </body>
 
+
 </html>
+
 
 
 
