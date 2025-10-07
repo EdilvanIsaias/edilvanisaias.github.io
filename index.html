@@ -356,49 +356,49 @@
   </script>
 
   <script>
-    const btnAbrir = document.getElementById('btn-abrir-chat');
-    const overlay = document.getElementById('chat-overlay');
-    const btnFechar = document.getElementById('btn-fechar-chat');
-    const iframe = document.getElementById('iframe-sofia-chat');
+  const btnAbrir = document.getElementById('btn-abrir-chat');
+  const overlay = document.getElementById('chat-overlay');
+  const btnFechar = document.getElementById('btn-fechar-chat');
+  const iframe = document.getElementById('iframe-sofia-chat');
 
-    function abrirChatComMensagem(mensagem) {
-      overlay.style.display = 'flex';
+  function abrirChatComMensagem(mensagem) {
+    overlay.style.display = 'flex';
+
+    // Aguarda o iframe carregar, então envia a mensagem
+    setTimeout(() => {
       iframe.contentWindow.postMessage({
         type: 'sendMessage',
         message: mensagem
       }, '*');
-    }
+    }, 1000); // espera 1 segundo para garantir que o iframe esteja carregado
+  }
 
-window.addEventListener('load', () => {
-  overlay.style.display = 'flex';
-
-  iframe.addEventListener('load', () => {
-    iframe.contentWindow.postMessage({
-      type: 'sendMessage',
-      message: "Olá! Como posso ajudar? (Digite 'Suporte' para atendimento humano.)"
-    }, '*');
+  btnAbrir.addEventListener('click', () => {
+    abrirChatComMensagem("Olá! Como posso ajudar? (Digite 'Suporte' para atendimento humano.)");
   });
-});
 
+  btnFechar.addEventListener('click', () => {
+    overlay.style.display = 'none';
+  });
 
-    });
-
-    btnFechar.addEventListener('click', () => {
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) {
       overlay.style.display = 'none';
-    });
+    }
+  });
 
-    overlay.addEventListener('click', (e) => {
-      if (e.target === overlay) {
-        overlay.style.display = 'none';
-      }
+  document.querySelectorAll('.btn-agendar').forEach(btn => {
+    btn.addEventListener('click', () => {
+      abrirChatComMensagem("Agendamento");
     });
+  });
 
-    document.querySelectorAll('.btn-agendar').forEach(btn => {
-      btn.addEventListener('click', () => {
-        abrirChatComMensagem("Agendamento");
-      });
-    });
-  </script>
+  // ✅ Abre o chat automaticamente ao carregar a página
+  window.addEventListener('load', () => {
+    abrirChatComMensagem("Olá! Como posso ajudar? (Digite 'Suporte' para atendimento humano.)");
+  });
+</script>
+
 
   <!-- ===== TROCA DE IMAGENS DO HEADER ===== -->
   <script>
@@ -435,6 +435,7 @@ window.addEventListener('load', () => {
 
 </body>
 </html>
+
 
 
 
