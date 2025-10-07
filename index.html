@@ -192,13 +192,28 @@
 
   <!-- ===== MODAIS ===== -->
   <!-- ===== MODAL LOGIN ===== -->
+<!-- ===== MODAL LOGIN FUNCIONAL ===== -->
 <div class="modal" id="modal-login">
   <div class="modal-content">
     <span class="close" onclick="fecharModal('modal-login')">&times;</span>
     <h2>Entrar na Conta</h2>
-    <input type="email" placeholder="E-mail" />
-    <input type="password" placeholder="Senha" />
-    <button class="btn-login">Entrar</button>
+
+    <form id="login-form">
+      <div class="form-group">
+        <label for="email">E-mail</label>
+        <input type="email" name="email" id="email" placeholder="Digite seu e-mail" required />
+        <span class="error-message"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Senha</label>
+        <input type="password" name="password" id="password" placeholder="Digite sua senha" required />
+        <span class="error-message"></span>
+      </div>
+
+      <button type="submit" class="btn-login">Entrar</button>
+    </form>
+
     <p style="margin-top: 10px;">Não tem conta? <a href="#" onclick="abrirCadastro()">Cadastre-se</a></p>
   </div>
 </div>
@@ -260,7 +275,7 @@
 
     let valid = true;
 
-    // limpa erros
+    // Limpa erros anteriores
     this.querySelectorAll('.error-message').forEach(span => (span.textContent = ''));
 
     const emailInput = this.elements['email'];
@@ -270,7 +285,7 @@
       emailInput.nextElementSibling.textContent = 'Por favor, insira seu e-mail.';
       valid = false;
     } else if (!emailInput.validity.valid) {
-      emailInput.nextElementSibling.textContent = 'Por favor, insira um e-mail válido.';
+      emailInput.nextElementSibling.textContent = 'E-mail inválido.';
       valid = false;
     }
 
@@ -281,11 +296,12 @@
 
     if (valid) {
       alert('Login realizado com sucesso! (simulação)');
-      // Aqui coloque a lógica real de login (API, redirecionamento, etc)
       fecharModal('modal-login');
+      // Aqui você pode redirecionar ou chamar uma API de autenticação real
     }
   });
 </script>
+
 >
     </div>
   </div>
@@ -542,6 +558,7 @@
 
 </body>
 </html>
+
 
 
 
