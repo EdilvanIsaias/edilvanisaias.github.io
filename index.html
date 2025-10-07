@@ -390,10 +390,11 @@
     });
   });
 
-  // ✅ Abre o chat automaticamente ao carregar a página
-  window.addEventListener('load', () => {
-    abrirChatComMensagem("Olá! Como posso ajudar? (Digite 'Suporte' para atendimento humano.)");
-  });
+ // ✅ Apenas abre o chat ao carregar, sem tentar enviar mensagem
+window.addEventListener('load', () => {
+  overlay.style.display = 'flex'; // Mostra o chat automaticamente
+});
+
 </script>
 
 
@@ -432,6 +433,7 @@
 
 </body>
 </html>
+
 
 
 
