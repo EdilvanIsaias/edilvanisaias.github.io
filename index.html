@@ -379,10 +379,28 @@
       }
     });
   </script>
+<script>
+  window.addEventListener('load', () => {
+    const overlay = document.getElementById('chat-overlay');
+    const iframe = document.getElementById('iframe-sofia-chat');
 
+    // Aguarda 1 segundo para garantir que o iframe carregou
+    setTimeout(() => {
+      if (overlay && iframe) {
+        overlay.style.display = 'flex';
+        iframe.contentWindow.postMessage({
+          type: 'sendMessage',
+          message: "Olá! Como posso ajudar? (Digite 'Suporte' para atendimento humano.)"
+        }, '*');
+      }
+    }, 1000);
+  });
+</script>
+  
 </body>
 
 </html>
+
 
 
 
