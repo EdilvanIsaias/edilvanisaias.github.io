@@ -226,26 +226,19 @@
     </div>
   </header>
 
-  <!-- BOTÃO FIXO (ÍCONE MAIOR) FIXADO NA TELA -->
+  <!-- BOTÃO FIXO (ÍCONE ORIGINAL DA ZAIA) FIXADO NA TELA -->
   <button id="btn-abrir-chat" style="
     position: fixed;
     bottom: 25px;
     right: 25px;
-    background-color: #007bff;
+    background-color: transparent;
     border: none;
-    border-radius: 50%;
-    width: 65px;
-    height: 65px;
     cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    width: 70px;
+    height: 70px;
     z-index: 10001;
   " title="Conversar com Sofia">
-    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="white" viewBox="0 0 16 16">
-      <path d="M8 1a7 7 0 1 0 4.95 11.95l3.37 1.68a.5.5 0 0 0 .63-.63l-1.68-3.37A7 7 0 0 0 8 1zM7 7v3h2V7H7z"/>
-    </svg>
+    <img src="https://platform.zaia.app/assets/chat-icon.svg" alt="Chat Sofia" style="width: 100%; height: 100%; object-fit: contain;" />
   </button>
 
   <!-- CHAT OVERLAY -->
@@ -374,7 +367,14 @@
     }
 
     btnAbrir.addEventListener('click', () => {
-      abrirChatComMensagem("Olá! Como posso ajudar? (Digite 'Suporte' para atendimento humano.)");
+      abrirChatComMensagem(`Oi. Como posso te ajudar?
+
+Descreva seu problema ou
+Digite uma das opções:
+Financeiro
+Exames
+Agendamento
+Falar com Humano`);
     });
 
     btnFechar.addEventListener('click', () => {
@@ -408,7 +408,9 @@
   </script>
 
 </body>
+
 </html>
+
 
 
 
