@@ -191,44 +191,18 @@
   </nav>
 
   <!-- ===== MODAIS ===== -->
-  <div class="modal" id="modal-login">
-    <div class="modal-content">
-  <span class="close" onclick="fecharModal('modal-login')">&times;</span>
-  <h2>Login</h2>
-  <form id="login-form" novalidate>
-    <div class="form-group">
-      <label for="login-email">E-mail</label>
-      <input
-        type="email"
-        id="login-email"
-        name="email"
-        placeholder="Digite seu e-mail"
-        required
-        autocomplete="username"
-      />
-      <span class="error-message" aria-live="polite"></span>
-    </div>
-
-    <div class="form-group">
-      <label for="login-password">Senha</label>
-      <input
-        type="password"
-        id="login-password"
-        name="password"
-        placeholder="Digite sua senha"
-        required
-        autocomplete="current-password"
-      />
-      <span class="error-message" aria-live="polite"></span>
-    </div>
-
-    <button type="submit" class="login-btn">Entrar</button>
-  </form>
-  <p>
-    Não tem conta?
-    <a href="#" onclick="abrirCadastro()">Cadastre-se</a>
-  </p>
+  <!-- ===== MODAL LOGIN ===== -->
+<div class="modal" id="modal-login">
+  <div class="modal-content">
+    <span class="close" onclick="fecharModal('modal-login')">&times;</span>
+    <h2>Entrar na Conta</h2>
+    <input type="email" placeholder="E-mail" />
+    <input type="password" placeholder="Senha" />
+    <button class="btn-login">Entrar</button>
+    <p style="margin-top: 10px;">Não tem conta? <a href="#" onclick="abrirCadastro()">Cadastre-se</a></p>
+  </div>
 </div>
+
 
 <style>
   /* Form group básico para espaçamento */
@@ -316,19 +290,20 @@
     </div>
   </div>
 
-  <div class="modal" id="modal-cadastro">
-    <div class="modal-content">
-      <span class="close" onclick="fecharModal('modal-cadastro')">&times;</span>
-      <h2>Cadastro</h2>
-      <input type="text" placeholder="Nome completo" />
-      <input type="text" placeholder="CPF" />
-      <input type="email" placeholder="E-mail" />
-      <input type="tel" placeholder="Telefone celular" />
-      <input type="text" placeholder="Endereço completo" />
-      <input type="password" placeholder="Senha" />
-      <button>Cadastrar</button>
-    </div>
+  <!-- ===== MODAL CADASTRO ===== -->
+<div class="modal" id="modal-cadastro">
+  <div class="modal-content">
+    <span class="close" onclick="fecharModal('modal-cadastro')">&times;</span>
+    <h2>Criar Conta</h2>
+    <input type="text" placeholder="Nome completo" />
+    <input type="text" placeholder="CPF" />
+    <input type="email" placeholder="E-mail" />
+    <input type="tel" placeholder="Telefone celular" />
+    <input type="text" placeholder="Endereço completo" />
+    <input type="password" placeholder="Senha" />
+    <button class="btn-login">Cadastrar</button>
   </div>
+</div>
 
   <div class="modal" id="modal-exame">
   <div class="modal-content">
@@ -567,6 +542,7 @@
 
 </body>
 </html>
+
 
 
 
