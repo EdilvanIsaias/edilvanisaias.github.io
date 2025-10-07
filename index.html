@@ -127,15 +127,16 @@
       color: #666;
     }
 
-    /* HEADER ORIGINAL */
+    /* ===== HEADER ===== */
     header {
-      background: url('images/1.png') center/cover no-repeat;
+      background: url('images/1.webp') center center / cover no-repeat;
       color: white;
       text-align: center;
       position: relative;
       height: 70vh;
       margin-top: 0;
       padding-top: 1rem;
+      transition: background-image 1s ease-in-out;
     }
 
     header .overlay {
@@ -216,7 +217,7 @@
   </div>
 
   <!-- ===== HEADER ===== -->
-  <header>
+  <header id="header">
     <div class="overlay">
       <div class="container">
         <h1>Kyrios Clinical Services</h1>
@@ -292,7 +293,7 @@
       <h2>Agende sua Consulta</h2>
       <div class="cards">
         <div class="card">
-          <img src="images/2.png" alt="Consulta Presencial" />
+          <img src="images/2.webp" alt="Consulta Presencial" />
           <h3>Consulta Presencial</h3>
           <p>Atendimento em nosso consultório com equipe especializada.</p>
           <p><strong>Local:</strong> Rua da Saúde, 123 - São Paulo - SP</p>
@@ -300,7 +301,7 @@
         </div>
 
         <div class="card">
-          <img src="images/3.png" alt="Consulta Online" />
+          <img src="images/3.webp" alt="Consulta Online" />
           <h3>Consulta Online</h3>
           <p>Atendimento via videochamada. Praticidade e conforto para você.</p>
           <p><strong>Email:</strong> online@kyrios.com.br</p>
@@ -322,9 +323,6 @@
     </div>
   </footer>
 
-  <script src="calendar.js"></script>
-
-  <!-- ===== SCRIPTS ===== -->
   <script>
     function abrirLogin() {
       document.getElementById('modal-login').style.display = 'flex';
@@ -379,6 +377,22 @@
         abrirChatComMensagem("Agendamento");
       });
     });
+  </script>
+
+  <!-- ===== TROCA DE IMAGENS DO HEADER ===== -->
+  <script>
+    const header = document.getElementById('header');
+    const imagens = [
+      'images/1.webp',
+      'images/2.webp',
+      'images/3.webp'
+    ];
+    let indice = 0;
+
+    setInterval(() => {
+      indice = (indice + 1) % imagens.length;
+      header.style.backgroundImage = `url('${imagens[indice]}')`;
+    }, 5000);
   </script>
 
 </body>
