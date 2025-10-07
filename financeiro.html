@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Financeiro - Kyrios Clinical Services</title>
+  <style>
+    /* ===== BASE GERAL ===== */
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f5f7fa;
+      color: #333;
+      line-height: 1.6;
+      padding-top: 56px; /* espaço para navbar fixa */
+    }
+    .container {
+      max-width: 960px;
+      margin: auto;
+      padding: 2rem;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    /* ===== NAVBAR ===== */
+    nav {
+      background-color: #004d66;
+      padding: 12px 0;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+
+    /* Botão voltar simples */
+    #btn-voltar {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.15rem;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 8px 15px;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+    }
+    #btn-voltar:hover {
+      background-color: rgba(255,255,255,0.2);
+    }
+
+    /* Botão Login igual da outra página */
+    .login-btn {
+      background: none;
+      border: 1.5px solid white;
+      color: white;
+      padding: 8px 18px;
+      cursor: pointer;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 1.15rem;
+      transition: background-color 0.3s ease;
+    }
+    .login-btn:hover {
+      background-color: rgba(255,255,255,0.2);
+    }
+
+    /* ===== HEADER / FUNDO TÍTULO ===== */
+    /* ===== HEADER / CARROSSEL DE FUNDO ===== */
+    header.page-header {
+      position: relative;
+      width: 100vw;
+      height: 280px;
+      background-color: #004d66; /* fallback */
+      overflow: hidden;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      border-radius: 0 0 12px 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    }
+
+    /* Container do carrossel */
+    .header-carousel {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    /* Imagens em fade */
+    .header-carousel img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    /* Imagem visível */
+    .header-carousel img.active {
+      opacity: 1;
+    }
+
+    /* Título no topo do carrossel */
+    header.page-header h1 {
+      position: relative;
+      z-index: 2;
+      font-size: 2.5rem;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+      font-weight: 700;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+    }
+
+    /* ===== PLANOS FINANCEIROS ===== */
+    /* ===== SEÇÃO PLANOS COM TÍTULO CENTRALIZADO ===== */
+    .planos-section {
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+
+    .planos-section h2 {
+      font-size: 2rem;
+      color: #004d66;
+      margin-bottom: 2rem;
+      font-weight: 700;
+    }
+
+    /* Mantém o estilo dos planos já existente */
+    .planos {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .plano {
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 10px;
+      padding: 1rem;
+      max-width: 320px;
+      flex: 1 1 280px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease;
+    }
+    .plano:hover {
+      transform: translateY(-5px);
+    }
+    .plano img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+    .plano h3 {
+      margin: 0.5rem 0;
+      font-weight: 700;
+      color: #004d66;
+    }
+    .plano p {
+      flex-grow: 1;
+      font-size: 1rem;
+      color: #555;
+    }
+    .plano button {
+      margin-top: 1rem;
+      background-color: #198754;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      font-size: 1rem;
+    }
+    .plano button:hover {
+      background-color: #157347;
+    }
+
+    /* ===== SEGUNDA VIA ===== */
+    .segunda-via {
+      background: white url('images/texture-bg.jpg') center/cover no-repeat;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.05);
+      max-width: 480px;
+      margin: 0 auto 3rem auto;
+      text-align: center;
+    }
+    .segunda-via h2 {
+      margin-bottom: 1rem;
+      color: #222;
+    }
+    .segunda-via input[type="email"] {
+      padding: 10px;
+      width: 80%;
+      max-width: 350px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+    .segunda-via button {
+      background-color: #004d66;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+    }
+    .segunda-via button:hover {
+      background-color: #003a4f;
+    }
+
+    /* ===== CARTÕES ===== */
+    .cartoes {
+      background: white url('images/texture-bg.jpg') center/cover no-repeat;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.05);
+      max-width: 700px;
+      margin: 0 auto 4rem auto;
+      text-align: center;
+    }
+    .cartoes h2 {
+      margin-bottom: 1rem;
+      color: #222;
+    }
+    .cartoes p {
+      color: #555;
+      font-size: 1rem;
+    }
+
+    /* ===== IFRAME MODAL ===== */
+    #chat-overlay,
+    #login-overlay {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0,0,0,0.5);
+      justify-content: center;
+      align-items: center;
+    }
+    #login-overlay {
+      display: none;
+      display: flex; /* importante para o modal */
+    }
+    .modal-content {
+      background: #fff;
+      border-radius: 10px;
+      width: 1050px;
+      height: 620px;
+      position: relative;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      overflow: hidden;
+    }
+    .modal-content iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      font-size: 18px;
+    }
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 28px;
+      font-weight: bold;
+      background: #ff4c4c;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      line-height: 36px;
+      text-align: center;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    /* ===== RESPONSIVIDADE ===== */
+    @media (max-width: 768px) {
+      header.page-header h1 {
+        font-size: 2em;
+      }
+      .planos {
+        flex-direction: column;
+        align-items: center;
+      }
+      nav {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+      .container {
+        padding: 1rem;
+      }
+      .segunda-via input[type="email"] {
+        width: 100%;
+        max-width: none;
+      }
+      .modal-content {
+        width: 90vw;
+        height: 80vh;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Widget Env Script -->
+<script>
+  window.ZWidget = {
+    AgentURL: "https://platform.zaia.app/embed/chat/65791",
+    autoShow: true,
+    openOnLoad: true,
+    showLauncher: true,
+    launcherText: "💬 Fale conosco",
+    position: "right",
+    width: "380px",
+    height: "540px"
+  };
+</script>
+<script src="https://platform.zaia.app/script/widget-loader.js"></script>
+
+<nav role="navigation" aria-label="Barra de navegação principal">
+  <button id="btn-voltar" aria-label="Voltar para a página anterior">← Voltar</button>
+  <button class="login-btn" id="btn-login" aria-label="Login">Login</button>
+</nav>
+
+<header class="page-header" role="banner">
+  <div class="header-carousel" aria-hidden="true">
+    <img src="images/2.png" alt="" class="active" />
+    <img src="images/3.png" alt="" />
+    <img src="images/5.png" alt="" />
+  </div>
+  <h1>Financeiro - Kyrios Clinical Services</h1>
+</header>
+
+<main class="container">
+  <!-- Planos Financeiros -->
+  <section aria-labelledby="planos-title" class="planos-section" role="region" id="planos">
+    <h2 id="planos-title">Planos Financeiros</h2>
+    <div class="planos">
+      <article class="plano" tabindex="0" aria-label="Plano Básico">
+        <img src="images/plano.webp" alt="Imagem ilustrativa do Plano Básico" />
+        <h3>Plano Básico</h3>
+        <p>Descrição do plano básico.</p>
+        <button>Assinar</button>
+      </article>
+      <article class="plano" tabindex="0" aria-label="Plano Avançado">
+        <img src="images/plano2.webp" alt="Imagem ilustrativa do Plano Avançado" />
+        <h3>Plano Avançado</h3>
+        <p>Descrição do plano avançado.</p>
+        <button>Assinar</button>
+      </article>
+      <article class="plano" tabindex="0" aria-label="Plano Premium">
+        <img src="images/plano3.webp" alt="Imagem ilustrativa do Plano Premium" />
+        <h3>Plano Premium</h3>
+        <p>Descrição do plano premium.</p>
+        <button>Assinar</button>
+      </article>
+    </div>
+  </section>
+
+  <!-- Segunda Via -->
+  <section aria-labelledby="segunda-via-title" class="segunda-via" role="region" id="segunda-via">
+    <h2 id="segunda-via-title">Segunda Via</h2>
+    <form id="segunda-via-form">
+      <input type="email" id="email-segunda-via" name="email" placeholder="Digite seu e-mail" aria-label="Digite seu e-mail para solicitar segunda via" required />
+      <br />
+      <button type="submit">Solicitar</button>
+    </form>
+  </section>
+
+  <!-- Cartões -->
+  <section aria-labelledby="cartoes-title" class="cartoes" role="region" id="cartao">
+    <h2 id="cartoes-title">Cartões de Crédito</h2>
+    <p>Aqui você pode adicionar seus cartões para pagamentos rápidos.</p>
+  </section>
+</main>
+
+<!-- Modal Login -->
+<div id="login-overlay" role="dialog" aria-modal="true" aria-labelledby="login-modal-title" tabindex="-1" style="display:none;">
+  <div class="modal-content">
+    <button class="close" aria-label="Fechar modal">×</button>
+    <iframe src="login.html" title="Formulário de login"></iframe>
+  </div>
+</div>
+
+<script>
+  // Botão voltar retorna para a página anterior
+  document.getElementById('btn-voltar').addEventListener('click', () => {
+    window.location.href = 'https://edilvanisaias.github.io/#';
+  });
+
+  // Abrir modal de login
+  const btnLogin = document.getElementById('btn-login');
+  const loginOverlay = document.getElementById('login-overlay');
+  const closeModalBtn = loginOverlay.querySelector('.close');
+
+  btnLogin.addEventListener('click', () => {
+    loginOverlay.style.display = 'flex';
+    loginOverlay.focus();
+  });
+
+  closeModalBtn.addEventListener('click', () => {
+    loginOverlay.style.display = 'none';
+    btnLogin.focus();
+  });
+
+  // Fechar modal ao clicar fora do conteúdo
+  loginOverlay.addEventListener('click', (e) => {
+    if (e.target === loginOverlay) {
+      loginOverlay.style.display = 'none';
+      btnLogin.focus();
+    }
+  });
+
+  // Fechar modal com ESC
+  document.addEventListener('keydown', (e) => {
+    if (e.key === "Escape" && loginOverlay.style.display === 'flex') {
+      loginOverlay.style.display = 'none';
+      btnLogin.focus();
+    }
+  });
+</script>
+
+<script>
+  // Carrossel simples de fundo do header
+  const imgs = document.querySelectorAll('.header-carousel img');
+  let current = 0;
+
+  setInterval(() => {
+    imgs[current].classList.remove('active');
+    current = (current + 1) % imgs.length;
+    imgs[current].classList.add('active');
+  }, 5000);
+</script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    const secao = params.get('secao');
+
+    if (secao) {
+      const target = document.getElementById(secao);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  });
+</script>
+
+</body>
+</html>
