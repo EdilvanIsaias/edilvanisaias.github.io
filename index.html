@@ -129,7 +129,7 @@
 
     /* HEADER ORIGINAL */
     header {
-      background: url('images/header-bg.jpg') center/cover no-repeat;
+      background: url('images/1.png') center/cover no-repeat;
       color: white;
       text-align: center;
       position: relative;
@@ -150,7 +150,7 @@
 </head>
 <body>
 
-  <!-- ===== NAVBAR COM LINKS INTERNOS ===== -->
+  <!-- ===== NAVBAR ===== -->
   <nav>
     <ul>
       <li>
@@ -189,7 +189,7 @@
     </ul>
   </nav>
 
-  <!-- ===== MODAL DE LOGIN ===== -->
+  <!-- ===== MODAIS ===== -->
   <div class="modal" id="modal-login">
     <div class="modal-content">
       <span class="close" onclick="fecharModal('modal-login')">&times;</span>
@@ -201,7 +201,6 @@
     </div>
   </div>
 
-  <!-- ===== MODAL DE CADASTRO ===== -->
   <div class="modal" id="modal-cadastro">
     <div class="modal-content">
       <span class="close" onclick="fecharModal('modal-cadastro')">&times;</span>
@@ -216,7 +215,7 @@
     </div>
   </div>
 
-  <!-- ===== HEADER ORIGINAL ===== -->
+  <!-- ===== HEADER ===== -->
   <header>
     <div class="overlay">
       <div class="container">
@@ -226,7 +225,7 @@
     </div>
   </header>
 
-  <!-- BOTÃO FIXO (ÍCONE MAIOR) FIXADO NA TELA -->
+  <!-- ===== BOTÃO FIXO (CHAT) ===== -->
   <button id="btn-abrir-chat" style="
     position: fixed;
     bottom: 25px;
@@ -248,7 +247,7 @@
     </svg>
   </button>
 
-  <!-- CHAT OVERLAY -->
+  <!-- ===== CHAT OVERLAY ===== -->
   <div id="chat-overlay" style="
     position: fixed;
     top: 0; left: 0; width: 100vw; height: 100vh;
@@ -281,7 +280,7 @@
     </div>
   </div>
 
-  <!-- CONTEÚDO ORIGINAL MANTIDO -->
+  <!-- ===== CONTEÚDO ===== -->
   <main class="container">
     <section class="about">
       <h2>Sobre Nós</h2>
@@ -293,29 +292,21 @@
       <h2>Agende sua Consulta</h2>
       <div class="cards">
         <div class="card">
-          <img src="images/presencial.jpg" alt="Consulta Presencial" />
+          <img src="images/2.png" alt="Consulta Presencial" />
           <h3>Consulta Presencial</h3>
           <p>Atendimento em nosso consultório com equipe especializada.</p>
           <p><strong>Local:</strong> Rua da Saúde, 123 - São Paulo - SP</p>
-          <!-- Botão abre chat e envia "Agendamento" -->
           <button class="btn-agendar">Agendar</button>
         </div>
 
         <div class="card">
-          <img src="images/online.jpg" alt="Consulta Online" />
+          <img src="images/3.png" alt="Consulta Online" />
           <h3>Consulta Online</h3>
           <p>Atendimento via videochamada. Praticidade e conforto para você.</p>
           <p><strong>Email:</strong> online@kyrios.com.br</p>
-          <!-- Botão abre chat e envia "Agendamento" -->
           <button class="btn-agendar">Agendar</button>
         </div>
       </div>
-    </section>
-
-    <section class="calendar" id="calendar-section" style="display: none;">
-      <h2>Converse com Sofia</h2>
-      <p class="obs">Nossa assistente pode ajudá-lo a agendar uma consulta:</p>
-      <button onclick="window.ZWidget.open()">Conversar com Sofia</button>
     </section>
   </main>
 
@@ -333,7 +324,7 @@
 
   <script src="calendar.js"></script>
 
-  <!-- Script para modais -->
+  <!-- ===== SCRIPTS ===== -->
   <script>
     function abrirLogin() {
       document.getElementById('modal-login').style.display = 'flex';
@@ -355,18 +346,14 @@
     }
   </script>
 
-  <!-- Script para abrir/fechar chat e enviar mensagens iniciais -->
   <script>
     const btnAbrir = document.getElementById('btn-abrir-chat');
     const overlay = document.getElementById('chat-overlay');
     const btnFechar = document.getElementById('btn-fechar-chat');
     const iframe = document.getElementById('iframe-sofia-chat');
 
-    // Função para abrir chat e enviar mensagem via postMessage
     function abrirChatComMensagem(mensagem) {
       overlay.style.display = 'flex';
-
-      // PostMessage para iframe, tenta enviar a mensagem
       iframe.contentWindow.postMessage({
         type: 'sendMessage',
         message: mensagem
@@ -387,39 +374,12 @@
       }
     });
 
-    // Botões de agendamento abrem chat com mensagem "Agendamento"
     document.querySelectorAll('.btn-agendar').forEach(btn => {
       btn.addEventListener('click', () => {
         abrirChatComMensagem("Agendamento");
       });
     });
-
-    // Opcional: alerta sobre "suporte" caso o usuário digite na conversa (se integrado)
-    window.addEventListener('message', (event) => {
-      if (!event.data) return;
-
-      if (event.data.type === 'userMessage') {
-        const msg = (event.data.message || '').toLowerCase();
-        if (msg.includes('suporte')) {
-          alert('Você digitou "Suporte". Isso fará com que você seja encaminhado visualmente para atendimento humano.');
-        }
-      }
-    });
   </script>
 
 </body>
-
-
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
