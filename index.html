@@ -360,60 +360,62 @@
   const overlay = document.getElementById('chat-overlay');
   const btnFechar = document.getElementById('btn-fechar-chat');
   const iframe = document.getElementById('iframe-sofia-chat');
-    
-function abrirChatComMensagem(mensagem) {
-  overlay.style.display = 'flex';
 
-  // Espera 1 segundo para garantir que o iframe carregue
-  setTimeout(() => {
-    try {
-      iframe.contentWindow.postMessage({
-        type: 'sendMessage',
-        message: mensagem
-      }, '*');
-    } catch (e) {
-      console.warn("Não foi possível enviar mensagem ao chat:", e);
-    }
-  }, 1000);
-}
-
-
-    // Aguarda o iframe carregar, então envia a mensagem
-    setTimeout(() => {
-      iframe.contentWindow.postMessage({
-        type: 'sendMessage',
-        message: mensagem
-      }, '*');
-    }, 1000); // espera 1 segundo para garantir que o iframe esteja carregado
+  // Abre o chat (overlay) sem mensagem
+  function abrirChat() {
+    overlay.style.display = 'flex';
   }
 
+  // Abre o chat e envia mensagem após garantir que o iframe carregou
+  function abrirChatComMensagem(mensagem) {
+    overlay.style.display = 'flex';
 
+    // Espera o iframe carregar
+    if (iframe.contentWindow) {
+      // Tenta enviar a mensagem após 1s para garantir que o chat está pronto
+      setTimeout(() => {
+        try {
+          iframe.contentWindow.postMessage({
+            type: 'sendMessage',
+            message: mensagem
+          }, '*');
+        } catch (e) {
+          console.warn('Erro ao enviar mensagem para o chat:', e);
+        }
+      }, 1000);
+    } else {
+      console.warn('iframe ainda não está disponível para enviar mensagem');
+    }
+  }
+
+  // Fecha o chat
   btnFechar.addEventListener('click', () => {
     overlay.style.display = 'none';
   });
 
+  // Fecha o chat se clicar fora da área do iframe
   overlay.addEventListener('click', (e) => {
     if (e.target === overlay) {
       overlay.style.display = 'none';
     }
   });
 
+  // Botão flutuante abre o chat sem mensagem
+  btnAbrir.addEventListener('click', abrirChat);
+
+  // Botões de agendamento abrem o chat e enviam mensagem "Agendamento"
   document.querySelectorAll('.btn-agendar').forEach(btn => {
     btn.addEventListener('click', () => {
       abrirChatComMensagem("Agendamento");
     });
   });
 
- // ✅ Apenas abre o chat ao carregar, sem tentar enviar mensagem
-window.addEventListener('load', () => {
-  overlay.style.display = 'flex'; // Mostra o chat automaticamente
-});
-    btnAbrir.addEventListener('click', () => {
-  overlay.style.display = 'flex';
-});
-
-
+  // Opcional: abrir o chat automaticamente ao carregar a página
+  window.addEventListener('load', () => {
+    overlay.style.display = 'flex';
+  });
 </script>
+
 
 
   <!-- ===== TROCA DE IMAGENS DO HEADER ===== -->
@@ -451,6 +453,7 @@ window.addEventListener('load', () => {
 
 </body>
 </html>
+
 
 
 
