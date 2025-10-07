@@ -127,41 +127,24 @@
       color: #666;
     }
 
-    /* ===== HEADER COM SLIDESHOW ===== */
+    /* HEADER ORIGINAL */
     header {
-      position: relative;
-      height: 70vh;
-      overflow: hidden;
+      background: url('images/header-bg.jpg') center/cover no-repeat;
       color: white;
       text-align: center;
+      position: relative;
+      height: 70vh;
+      margin-top: 0;
+      padding-top: 1rem;
     }
 
     header .overlay {
       background-color: rgba(0, 0, 0, 0.5);
       height: 100%;
-      width: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      z-index: 2;
-    }
-
-    .slide {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0;
-      transition: opacity 1.5s ease-in-out;
-      z-index: 1;
-    }
-
-    .slide.active {
-      opacity: 1;
     }
   </style>
 </head>
@@ -206,7 +189,7 @@
     </ul>
   </nav>
 
-  <!-- ===== MODAIS ===== -->
+  <!-- ===== MODAL DE LOGIN ===== -->
   <div class="modal" id="modal-login">
     <div class="modal-content">
       <span class="close" onclick="fecharModal('modal-login')">&times;</span>
@@ -218,6 +201,7 @@
     </div>
   </div>
 
+  <!-- ===== MODAL DE CADASTRO ===== -->
   <div class="modal" id="modal-cadastro">
     <div class="modal-content">
       <span class="close" onclick="fecharModal('modal-cadastro')">&times;</span>
@@ -232,16 +216,8 @@
     </div>
   </div>
 
-  <!-- ===== HEADER COM SLIDES ===== -->
+  <!-- ===== HEADER ORIGINAL ===== -->
   <header>
-    <img src="images/1.png" class="slide active" alt="Slide 1" />
-    <img src="images/2.png" class="slide" alt="Slide 2" />
-    <img src="images/3.png" class="slide" alt="Slide 3" />
-    <img src="images/4.png" class="slide" alt="Slide 4" />
-    <img src="images/5.png" class="slide" alt="Slide 5" />
-    <img src="images/6.png" class="slide" alt="Slide 6" />
-    <img src="images/7.png" class="slide" alt="Slide 7" />
-
     <div class="overlay">
       <div class="container">
         <h1>Kyrios Clinical Services</h1>
@@ -250,11 +226,7 @@
     </div>
   </header>
 
-  <!-- ===== RESTANTE DO CÓDIGO ORIGINAL ===== -->
-  <!-- (mantido exatamente igual) -->
-  <!-- Botão flutuante, chat, main, footer e scripts — tudo inalterado -->
-
-  <!-- BOTÃO FIXO -->
+  <!-- BOTÃO FIXO (ÍCONE MAIOR) FIXADO NA TELA -->
   <button id="btn-abrir-chat" style="
     position: fixed;
     bottom: 25px;
@@ -277,26 +249,177 @@
   </button>
 
   <!-- CHAT OVERLAY -->
-  <div id="chat-overlay" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); display: none; justify-content: center; align-items: center; z-index: 10000;">
+  <div id="chat-overlay" style="
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+  ">
     <div style="position: relative; width: 1050px; height: 620px; background: #fff; border-radius: 12px; box-shadow: 0 0 20px rgba(0,0,0,0.4); overflow: hidden;">
-      <button id="btn-fechar-chat" title="Fechar chat" style="position: absolute; top: 10px; right: 10px; background: #ff4c4c; border: none; color: white; font-size: 28px; font-weight: bold; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; line-height: 32px; text-align: center; z-index: 10;">×</button>
+      <button id="btn-fechar-chat" title="Fechar chat" style="
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #ff4c4c;
+        border: none;
+        color: white;
+        font-size: 28px;
+        font-weight: bold;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        line-height: 32px;
+        text-align: center;
+        z-index: 10;
+      ">×</button>
+
       <iframe id="iframe-sofia-chat" src="https://platform.zaia.app/embed/chat/65791" style="width: 100%; height: 100%; border: none; font-size: 18px;"></iframe>
     </div>
   </div>
 
-  <!-- ===== CONTEÚDO, FOOTER E SCRIPTS ORIGINAIS ===== -->
-  <!-- (mantido integralmente, sem nenhuma alteração) -->
+  <!-- CONTEÚDO ORIGINAL MANTIDO -->
+  <main class="container">
+    <section class="about">
+      <h2>Sobre Nós</h2>
+      <p><strong>Kyrios Clinical Services</strong> nasceu com o propósito de unir excelência profissional e princípios éticos fundamentados em valores cristãos. O termo <em>Kyrios</em>, que em grego significa “Senhor”, reflete nossa inspiração em realizar um trabalho guiado por propósito, compaixão e integridade — um serviço eficiente, humano e na hora certa.</p>
+      <p>Não somos uma instituição confessional, mas nossa filosofia se baseia em fundamentos teológicos e morais amplos do cristianismo protestante, que inspiram cada aspecto do nosso atendimento: respeito, responsabilidade e cuidado genuíno com o próximo.</p>
+    </section>
 
+    <section class="agendamentos">
+      <h2>Agende sua Consulta</h2>
+      <div class="cards">
+        <div class="card">
+          <img src="images/presencial.jpg" alt="Consulta Presencial" />
+          <h3>Consulta Presencial</h3>
+          <p>Atendimento em nosso consultório com equipe especializada.</p>
+          <p><strong>Local:</strong> Rua da Saúde, 123 - São Paulo - SP</p>
+          <!-- Botão abre chat e envia "Agendamento" -->
+          <button class="btn-agendar">Agendar</button>
+        </div>
+
+        <div class="card">
+          <img src="images/online.jpg" alt="Consulta Online" />
+          <h3>Consulta Online</h3>
+          <p>Atendimento via videochamada. Praticidade e conforto para você.</p>
+          <p><strong>Email:</strong> online@kyrios.com.br</p>
+          <!-- Botão abre chat e envia "Agendamento" -->
+          <button class="btn-agendar">Agendar</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="calendar" id="calendar-section" style="display: none;">
+      <h2>Converse com Sofia</h2>
+      <p class="obs">Nossa assistente pode ajudá-lo a agendar uma consulta:</p>
+      <button onclick="window.ZWidget.open()">Conversar com Sofia</button>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <h3>Suporte e Contato</h3>
+      <ul>
+        <li><strong>Telefone:</strong> (11) 91234-5678</li>
+        <li><strong>Email:</strong> suporte@kyrios.com.br</li>
+        <li><strong>Endereço:</strong> Rua da Saúde, 123 - São Paulo - SP</li>
+      </ul>
+      <p>&copy; 2025 Kyrios Clinical Services. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="calendar.js"></script>
+
+  <!-- Script para modais -->
   <script>
-    let slideIndex = 0;
-    const slides = document.querySelectorAll(".slide");
-    setInterval(() => {
-      slides[slideIndex].classList.remove("active");
-      slideIndex = (slideIndex + 1) % slides.length;
-      slides[slideIndex].classList.add("active");
-    }, 5000);
+    function abrirLogin() {
+      document.getElementById('modal-login').style.display = 'flex';
+    }
+
+    function abrirCadastro() {
+      document.getElementById('modal-login').style.display = 'none';
+      document.getElementById('modal-cadastro').style.display = 'flex';
+    }
+
+    function fecharModal(id) {
+      document.getElementById(id).style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+      if (event.target.classList.contains('modal')) {
+        event.target.style.display = 'none';
+      }
+    }
+  </script>
+
+  <!-- Script para abrir/fechar chat e enviar mensagens iniciais -->
+  <script>
+    const btnAbrir = document.getElementById('btn-abrir-chat');
+    const overlay = document.getElementById('chat-overlay');
+    const btnFechar = document.getElementById('btn-fechar-chat');
+    const iframe = document.getElementById('iframe-sofia-chat');
+
+    // Função para abrir chat e enviar mensagem via postMessage
+    function abrirChatComMensagem(mensagem) {
+      overlay.style.display = 'flex';
+
+      // PostMessage para iframe, tenta enviar a mensagem
+      iframe.contentWindow.postMessage({
+        type: 'sendMessage',
+        message: mensagem
+      }, '*');
+    }
+
+    btnAbrir.addEventListener('click', () => {
+      abrirChatComMensagem("Olá! Como posso ajudar? (Digite 'Suporte' para atendimento humano.)");
+    });
+
+    btnFechar.addEventListener('click', () => {
+      overlay.style.display = 'none';
+    });
+
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) {
+        overlay.style.display = 'none';
+      }
+    });
+
+    // Botões de agendamento abrem chat com mensagem "Agendamento"
+    document.querySelectorAll('.btn-agendar').forEach(btn => {
+      btn.addEventListener('click', () => {
+        abrirChatComMensagem("Agendamento");
+      });
+    });
+
+    // Opcional: alerta sobre "suporte" caso o usuário digite na conversa (se integrado)
+    window.addEventListener('message', (event) => {
+      if (!event.data) return;
+
+      if (event.data.type === 'userMessage') {
+        const msg = (event.data.message || '').toLowerCase();
+        if (msg.includes('suporte')) {
+          alert('Você digitou "Suporte". Isso fará com que você seja encaminhado visualmente para atendimento humano.');
+        }
+      }
+    });
   </script>
 
 </body>
+
+
 </html>
+
+
+
+
+
+
+
+
+
+
+
 
