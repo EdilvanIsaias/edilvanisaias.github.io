@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login / Cadastro - Kyrios Clinical Services</title>
+  <style>
+    /* ===== BASE GERAL ===== */
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f5f7fa;
+      color: #333;
+      line-height: 1.6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .container {
+      background: white;
+      padding: 2rem 3rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      width: 420px;
+      max-width: 95vw;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: #004d66;
+    }
+
+    /* ===== TABS LOGIN/CADASTRO ===== */
+    .tab-buttons {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      gap: 1rem;
+    }
+    .tab-buttons button {
+      background: none;
+      border: 2px solid #004d66;
+      padding: 10px 25px;
+      font-weight: 700;
+      font-size: 1rem;
+      color: #004d66;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      flex: 1;
+    }
+    .tab-buttons button.active,
+    .tab-buttons button:hover {
+      background-color: #004d66;
+      color: white;
+    }
+
+    form {
+      display: none;
+      flex-direction: column;
+    }
+    form.active {
+      display: flex;
+    }
+
+    label {
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+      margin-top: 1rem;
+      color: #222;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      padding: 10px;
+      border: 1.5px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+      outline-offset: 2px;
+      transition: border-color 0.3s ease;
+    }
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="password"]:focus {
+      border-color: #004d66;
+    }
+
+    button.submit-btn {
+      margin-top: 2rem;
+      background-color: #004d66;
+      color: white;
+      border: none;
+      padding: 12px 0;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button.submit-btn:hover {
+      background-color: #003a4f;
+    }
+
+    /* Mensagem de erro */
+    .error-msg {
+      color: #d93025;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="container" role="main" aria-labelledby="login-title">
+    <h2 id="login-title">Acesse sua Conta</h2>
+
+    <div class="tab-buttons" role="tablist" aria-label="Alternar entre Login e Cadastro">
+      <button id="tab-login" role="tab" aria-selected="true" aria-controls="panel-login" tabindex="0" class="active">Login</button>
+      <button id="tab-cadastro" role="tab" aria-selected="false" aria-controls="panel-cadastro" tabindex="-1">Cadastro</button>
+    </div>
+
+    <!-- FORM LOGIN -->
+    <form id="panel-login" role="tabpanel" aria-labelledby="tab-login" class="active" novalidate>
+      <label for="login-email">E-mail</label>
+      <input type="email" id="login-email" name="login-email" placeholder="seu@email.com" required autocomplete="username" />
+      <div class="error-msg" id="login-email-error" aria-live="polite"></div>
+
+      <label for="login-password">Senha</label>
+      <input type="password" id="login-password" name="login-password" placeholder="Sua senha" required autocomplete="current-password" />
+      <div class="error-msg" id="login-password-error" aria-live="polite"></div>
+
+      <button type="submit" class="submit-btn">Entrar</button>
+    </form>
+
+    <!-- FORM CADASTRO -->
+    <form id="panel-cadastro" role="tabpanel" aria-labelledby="tab-cadastro" novalidate>
+      <label for="cadastro-nome">Nome Completo</label>
+      <input type="text" id="cadastro-nome" name="cadastro-nome" placeholder="Seu nome completo" required autocomplete="name" />
+      <div class="error-msg" id="cadastro-nome-error" aria-live="polite"></div>
+
+      <label for="cadastro-email">E-mail</label>
+      <input type="email" id="cadastro-email" name="cadastro-email" placeholder="seu@email.com" required autocomplete="email" />
+      <div class="error-msg" id="cadastro-email-error" aria-live="polite"></div>
+
+      <label for="cadastro-password">Senha</label>
+      <input type="password" id="cadastro-password" name="cadastro-password" placeholder="Crie uma senha" required autocomplete="new-password" />
+      <div class="error-msg" id="cadastro-password-error" aria-live="polite"></div>
+
+      <button type="submit" class="submit-btn">Cadastrar</button>
+    </form>
+  </div>
+
+  <script>
+    // Controle de abas
+    const tabLogin = document.getElementById('tab-login');
+    const tabCadastro = document.getElementById('tab-cadastro');
+    const panelLogin = document.getElementById('panel-login');
+    const panelCadastro = document.getElementById('panel-cadastro');
+
+    function switchTab(toLogin) {
+      if (toLogin) {
+        tabLogin.classList.add('active');
+        tabLogin.setAttribute('aria-selected', 'true');
+        tabLogin.setAttribute('tabindex', '0');
+
+        tabCadastro.classList.remove('active');
+        tabCadastro.setAttribute('aria-selected', 'false');
+        tabCadastro.setAttribute('tabindex', '-1');
+
+        panelLogin.classList.add('active');
+        panelCadastro.classList.remove('active');
+      } else {
+        tabLogin.classList.remove('active');
+        tabLogin.setAttribute('aria-selected', 'false');
+        tabLogin.setAttribute('tabindex', '-1');
+
+        tabCadastro.classList.add('active');
+        tabCadastro.setAttribute('aria-selected', 'true');
+        tabCadastro.setAttribute('tabindex', '0');
+
+        panelLogin.classList.remove('active');
+        panelCadastro.classList.add('active');
+      }
+    }
+
+    tabLogin.addEventListener('click', () => switchTab(true));
+    tabCadastro.addEventListener('click', () => switchTab(false));
+
+    // Validação simples
+    function showError(input, message) {
+      const errorElem = document.getElementById(input.id + '-error');
+      errorElem.textContent = message;
+      input.setAttribute('aria-invalid', message ? 'true' : 'false');
+    }
+
+    // Login form
+    document.getElementById('panel-login').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = e.target['login-email'];
+      const password = e.target['login-password'];
+      let valid = true;
+
+      showError(email, '');
+      showError(password, '');
+
+      if (!email.value || !email.validity.valid) {
+        showError(email, 'Por favor, insira um e-mail válido.');
+        valid = false;
+      }
+      if (!password.value) {
+        showError(password, 'Por favor, insira sua senha.');
+        valid = false;
+      }
+
+      if (valid) {
+        alert('Login realizado com sucesso! (simulação)');
+        // Aqui colocar o código real para login, API etc.
+      }
+    });
+
+    // Cadastro form
+    document.getElementById('panel-cadastro').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const nome = e.target['cadastro-nome'];
+      const email = e.target['cadastro-email'];
+      const password = e.target['cadastro-password'];
+      let valid = true;
+
+      showError(nome, '');
+      showError(email, '');
+      showError(password, '');
+
+      if (!nome.value.trim()) {
+        showError(nome, 'Por favor, insira seu nome completo.');
+        valid = false;
+      }
+      if (!email.value || !email.validity.valid) {
+        showError(email, 'Por favor, insira um e-mail válido.');
+        valid = false;
+      }
+      if (!password.value || password.value.length < 6) {
+        showError(password, 'A senha deve ter ao menos 6 caracteres.');
+        valid = false;
+      }
+
+      if (valid) {
+        alert('Cadastro realizado com sucesso! (simulação)');
+        // Aqui colocar o código real para cadastro, API etc.
+      }
+    });
+
+  </script>
+
+</body>
+</html>
