@@ -555,9 +555,66 @@
   }
 </script>
 
+  <!-- Outras partes da página acima -->
+
+<script>
+  // Abre o modal com base no ID passado
+  function abrirModal(id) {
+    document.getElementById(id).style.display = 'flex';
+  }
+
+  // Fecha o modal com base no ID passado
+  function fecharModal(id) {
+    document.getElementById(id).style.display = 'none';
+  }
+
+  // Validação do formulário de login
+  document.addEventListener('DOMContentLoaded', function () {
+    const loginForm = document.getElementById('login-form');
+
+    if (loginForm) {
+      loginForm.addEventListener('submit', function (e) {
+        e.preventDefault(); // Impede envio padrão
+        let valid = true;
+
+        // Limpa mensagens de erro anteriores
+        this.querySelectorAll('.error-message').forEach(span => span.textContent = '');
+
+        const email = this.email;
+        const password = this.password;
+
+        // Validação de e-mail
+        if (!email.value.trim()) {
+          email.nextElementSibling.textContent = 'Por favor, insira seu e-mail.';
+          valid = false;
+        } else if (!email.validity.valid) {
+          email.nextElementSibling.textContent = 'E-mail inválido.';
+          valid = false;
+        }
+
+        // Validação de senha
+        if (!password.value.trim()) {
+          password.nextElementSibling.textContent = 'Por favor, insira sua senha.';
+          valid = false;
+        }
+
+        // Se for válido, simula login
+        if (valid) {
+          alert('Login bem-sucedido! (simulado)');
+          fecharModal('modal-login');
+          this.reset();
+        }
+      });
+    }
+  });
+</script>
+</body>
+</html>
+
 
 </body>
 </html>
+
 
 
 
