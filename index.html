@@ -369,9 +369,17 @@
       }, '*');
     }
 
-    window.addEventListener('load', () => {
-  abrirChatComMensagem("Olá! Como posso ajudar? (Digite 'Suporte' para atendimento humano.)");
+window.addEventListener('load', () => {
+  overlay.style.display = 'flex';
+
+  iframe.addEventListener('load', () => {
+    iframe.contentWindow.postMessage({
+      type: 'sendMessage',
+      message: "Olá! Como posso ajudar? (Digite 'Suporte' para atendimento humano.)"
+    }, '*');
+  });
 });
+
 
     });
 
@@ -427,6 +435,7 @@
 
 </body>
 </html>
+
 
 
 
