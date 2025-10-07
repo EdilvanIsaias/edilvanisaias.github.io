@@ -193,12 +193,126 @@
   <!-- ===== MODAIS ===== -->
   <div class="modal" id="modal-login">
     <div class="modal-content">
-      <span class="close" onclick="fecharModal('modal-login')">&times;</span>
-      <h2>Login</h2>
-      <input type="email" placeholder="E-mail" />
-      <input type="password" placeholder="Senha" />
-      <button>Entrar</button>
-      <p>Não tem conta? <a href="#" onclick="abrirCadastro()">Cadastre-se</a></p>
+  <span class="close" onclick="fecharModal('modal-login')">&times;</span>
+  <h2>Login</h2>
+  <form id="login-form" novalidate>
+    <div class="form-group">
+      <label for="login-email">E-mail</label>
+      <input
+        type="email"
+        id="login-email"
+        name="email"
+        placeholder="Digite seu e-mail"
+        required
+        autocomplete="username"
+      />
+      <span class="error-message" aria-live="polite"></span>
+    </div>
+
+    <div class="form-group">
+      <label for="login-password">Senha</label>
+      <input
+        type="password"
+        id="login-password"
+        name="password"
+        placeholder="Digite sua senha"
+        required
+        autocomplete="current-password"
+      />
+      <span class="error-message" aria-live="polite"></span>
+    </div>
+
+    <button type="submit" class="login-btn">Entrar</button>
+  </form>
+  <p>
+    Não tem conta?
+    <a href="#" onclick="abrirCadastro()">Cadastre-se</a>
+  </p>
+</div>
+
+<style>
+  /* Form group básico para espaçamento */
+  .form-group {
+    margin-bottom: 16px;
+  }
+  label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #222;
+  }
+  input {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 1rem;
+    border: 1.5px solid #ccc;
+    border-radius: 6px;
+    transition: border-color 0.3s ease;
+  }
+  input:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+  .error-message {
+    color: #d9534f;
+    font-size: 0.85rem;
+    margin-top: 4px;
+    display: block;
+    min-height: 18px;
+  }
+  .login-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 24px;
+    padding: 12px 24px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease;
+    width: 100%;
+  }
+  .login-btn:hover {
+    background-color: #0056b3;
+  }
+</style>
+
+<script>
+  const loginForm = document.getElementById('login-form');
+
+  loginForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    let valid = true;
+
+    // limpa erros
+    this.querySelectorAll('.error-message').forEach(span => (span.textContent = ''));
+
+    const emailInput = this.elements['email'];
+    const passwordInput = this.elements['password'];
+
+    if (!emailInput.value.trim()) {
+      emailInput.nextElementSibling.textContent = 'Por favor, insira seu e-mail.';
+      valid = false;
+    } else if (!emailInput.validity.valid) {
+      emailInput.nextElementSibling.textContent = 'Por favor, insira um e-mail válido.';
+      valid = false;
+    }
+
+    if (!passwordInput.value.trim()) {
+      passwordInput.nextElementSibling.textContent = 'Por favor, insira sua senha.';
+      valid = false;
+    }
+
+    if (valid) {
+      alert('Login realizado com sucesso! (simulação)');
+      // Aqui coloque a lógica real de login (API, redirecionamento, etc)
+      fecharModal('modal-login');
+    }
+  });
+</script>
+>
     </div>
   </div>
 
@@ -453,6 +567,7 @@
 
 </body>
 </html>
+
 
 
 
