@@ -149,12 +149,7 @@
   </style>
 </head>
 <body>
-
-  <!-- ===== NAVBAR, modais, header, conteúdo mantido ===== -->
-  <nav> … </nav>
-  <div class="modal" id="modal-login"> … </div>
-  <div class="modal" id="modal-cadastro"> … </div>
-  <header> … </header>
+  <!-- … seu conteúdo de navbar, modais, header etc permanecem … -->
 
   <main class="container">
     <section class="about"> … </section>
@@ -189,18 +184,14 @@
 
   <script src="calendar.js"></script>
 
-  <!-- Script para modais -->
+  <!-- Script dos modais permanece igual -->
   <script>
-    function abrirLogin() {
-      document.getElementById('modal-login').style.display = 'flex';
-    }
+    function abrirLogin() { document.getElementById('modal-login').style.display = 'flex'; }
     function abrirCadastro() {
       document.getElementById('modal-login').style.display = 'none';
       document.getElementById('modal-cadastro').style.display = 'flex';
     }
-    function fecharModal(id) {
-      document.getElementById(id).style.display = 'none';
-    }
+    function fecharModal(id) { document.getElementById(id).style.display = 'none'; }
     window.onclick = function(event) {
       if (event.target.classList.contains('modal')) {
         event.target.style.display = 'none';
@@ -208,42 +199,46 @@
     };
   </script>
 
-  <!-- ZAIA WIDGET SCRIPT – manteve o padrão -->
+  <!-- Zaia widget scripts (este bloco deve vir antes do controle) -->
   <script>
     window.ZWidget = {
-      AgentURL: "https://platform.zaia.app/embed/chat/65791",
+      AgentURL: "https://platform.zaia.app/embed/chat/65791"
     };
   </script>
   <script src="https://platform.zaia.app/script/widget-loader.js"></script>
 
-  <!-- Script adicional de controle para mensagem inicial / botões -->
+  <!-- Script extra de controle (abre chat, envia mensagem inicial, associa botões) -->
   <script>
-    // Função para abrir chat e enviar mensagem inicial
-    function abrirChatComTextoInicial() {
-      if (window.ZWidget && typeof window.ZWidget.open === 'function') {
-        window.ZWidget.open();
-      }
-      // Tenta enviar texto logo que abrir (se permitido)
-      if (window.ZWidget && typeof window.ZWidget.sendMessage === 'function') {
-        window.ZWidget.sendMessage(
-          `Oi. Como posso te ajudar?\n\nDescreva seu problema ou\nDigite uma das opções:\nFinanceiro\nExames\nAgendamento\nFalar com Humano`
-        );
-      }
-    }
-
-    // Atrelando aos botões de agendamento
     document.addEventListener('DOMContentLoaded', () => {
-      document.querySelectorAll('.btn-agendar').forEach(btn => {
-        btn.addEventListener('click', () => {
+
+      function abrirChatComTextoInicial() {
+        // Só tenta se ZWidget existir
+        if (window.ZWidget && typeof window.ZWidget.open === 'function') {
+          window.ZWidget.open();
+        }
+        if (window.ZWidget && typeof window.ZWidget.sendMessage === 'function') {
+          window.ZWidget.sendMessage(
+            `Oi. Como posso te ajudar?\n\nDescreva seu problema ou\nDigite uma das opções:\nFinanceiro\nExames\nAgendamento\nFalar com Humano`
+          );
+        }
+      }
+
+      // Atrelando a ação dos botões de agendar
+      const btns = document.querySelectorAll('.btn-agendar');
+      btns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
           abrirChatComTextoInicial();
         });
       });
+
     });
   </script>
 
 </body>
 
 </html>
+
 
 
 
