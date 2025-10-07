@@ -302,6 +302,8 @@ footer p {
   .cards { flex-direction: column; }
   nav ul { flex-direction: column; gap: 1rem; }
 
+}
+
 /* ===== FORMULÁRIO LOGIN ===== */
 .form-group {
   margin-bottom: 16px;
@@ -338,8 +340,9 @@ label {
 
 .btn-login:hover {
   background-color: #0056b3;
-}
+
 
   
 }
+
 
