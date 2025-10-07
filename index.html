@@ -166,13 +166,13 @@
           <li><a href="financeiro-cartao.html">Cartão</a></li>
         </ul>
       </li>
-      <li>
-        <a href="#">Exames</a>
-        <ul>
-          <li><a href="exames-resultado.html">Resultado</a></li>
-          <li><a href="exames-acompanhamento.html">Acompanhamento</a></li>
-        </ul>
-      </li>
+     <li>
+  <a href="#" onclick="abrirPromptExame()">Exames</a>
+  <ul>
+    <li><a href="#" onclick="abrirPromptExame()">Resultado</a></li>
+  </ul>
+</li>
+
      <li>
   <a href="#agendamentos">Agendamento</a>
 </li>
@@ -215,6 +215,17 @@
       <button>Cadastrar</button>
     </div>
   </div>
+
+  <div class="modal" id="modal-exame">
+  <div class="modal-content">
+    <span class="close" onclick="fecharModal('modal-exame')">&times;</span>
+    <h2>Resultado de Exames</h2>
+    <input type="text" id="protocolo" placeholder="Protocolo" />
+    <input type="password" id="senha" placeholder="Senha" />
+    <button onclick="prosseguirExame()">Prosseguir</button>
+  </div>
+</div>
+
 
   <!-- ===== HEADER ===== -->
   <header id="header">
@@ -395,8 +406,26 @@
     }, 5000);
   </script>
 
+  <script>
+  function abrirPromptExame() {
+    document.getElementById('modal-exame').style.display = 'flex';
+  }
+
+  function prosseguirExame() {
+    const protocolo = document.getElementById('protocolo').value;
+    const senha = document.getElementById('senha').value;
+
+    // No futuro, aqui você pode validar os dados
+
+    // Redireciona para a página que será criada futuramente
+    window.location.href = 'exames-resultado-verificacao.html';
+  }
+</script>
+
+
 </body>
 </html>
+
 
 
 
