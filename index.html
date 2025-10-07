@@ -522,50 +522,54 @@
   }
 </script>
 
- document.addEventListener('DOMContentLoaded', function () {
-  const loginForm = document.getElementById('login-form');
+ <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const loginForm = document.getElementById('login-form');
 
-  if (loginForm) {
-    loginForm.addEventListener('submit', function (e) {
-      e.preventDefault(); // Impede o envio padrão
+    if (loginForm) {
+      loginForm.addEventListener('submit', function (e) {
+        e.preventDefault(); // Impede o envio padrão
 
-      let valid = true;
+        let valid = true;
 
-      // Limpa mensagens de erro anteriores
-      this.querySelectorAll('.error-message').forEach(span => span.textContent = '');
+        // Limpa mensagens de erro anteriores
+        this.querySelectorAll('.error-message').forEach(span => span.textContent = '');
 
-      const email = this.email;
-      const password = this.password;
+        const email = this.email;
+        const password = this.password;
 
-      // Validação do e-mail
-      if (!email.value.trim()) {
-        email.nextElementSibling.textContent = 'Por favor, insira seu e-mail.';
-        valid = false;
-      } else if (!email.validity.valid) {
-        email.nextElementSibling.textContent = 'E-mail inválido.';
-        valid = false;
-      }
+        // Validação do e-mail
+        if (!email.value.trim()) {
+          email.nextElementSibling.textContent = 'Por favor, insira seu e-mail.';
+          valid = false;
+        } else if (!email.validity.valid) {
+          email.nextElementSibling.textContent = 'E-mail inválido.';
+          valid = false;
+        }
 
-      // Validação da senha
-      if (!password.value.trim()) {
-        password.nextElementSibling.textContent = 'Por favor, insira sua senha.';
-        valid = false;
-      }
+        // Validação da senha
+        if (!password.value.trim()) {
+          password.nextElementSibling.textContent = 'Por favor, insira sua senha.';
+          valid = false;
+        }
 
-      // Se for válido, simula login
-      if (valid) {
-        // alert('Login bem-sucedido! (simulado)');
-        fecharModal('modal-login');
-        this.reset();
-      }
-    });
-  }
-});
+        // Se for válido, simula login
+        if (valid) {
+          // alert('Login bem-sucedido! (simulado)');
+          fecharModal('modal-login');
+          this.reset();
+        }
+      });
+    }
+  });
+</script>
+
 
 
 
 </body>
 </html>
+
 
 
 
