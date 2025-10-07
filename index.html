@@ -226,29 +226,15 @@
     </div>
   </header>
 
-  <!-- BOTÃO FIXO (ÍCONE MAIOR) FIXADO NA TELA -->
-  <button id="btn-abrir-chat" style="
-    position: fixed;
-    bottom: 25px;
-    right: 25px;
-    background-color: #007bff;
-    border: none;
-    border-radius: 50%;
-    width: 65px;
-    height: 65px;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-    z-index: 10001;
-  " title="Conversar com Sofia">
-    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="white" viewBox="0 0 16 16">
+  <!-- ZAIA WIDGET - BOTÃO E CHAT -->
+  <button id="btn-abrir-chat" style="font-size: 18px; padding: 12px 24px; cursor:pointer; display: flex; align-items: center; gap: 10px; margin: 1rem;">
+    <!-- Ícone maior -->
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" viewBox="0 0 16 16">
       <path d="M8 1a7 7 0 1 0 4.95 11.95l3.37 1.68a.5.5 0 0 0 .63-.63l-1.68-3.37A7 7 0 0 0 8 1zM7 7v3h2V7H7z"/>
     </svg>
+    Conversar com Sofia
   </button>
 
-  <!-- CHAT OVERLAY -->
   <div id="chat-overlay" style="
     position: fixed;
     top: 0; left: 0; width: 100vw; height: 100vh;
@@ -297,8 +283,7 @@
           <h3>Consulta Presencial</h3>
           <p>Atendimento em nosso consultório com equipe especializada.</p>
           <p><strong>Local:</strong> Rua da Saúde, 123 - São Paulo - SP</p>
-          <!-- Botão abre chat e envia "Agendamento" -->
-          <button class="btn-agendar">Agendar</button>
+          <button onclick="abrirAgendamento('presencial')">Agendar</button>
         </div>
 
         <div class="card">
@@ -306,8 +291,7 @@
           <h3>Consulta Online</h3>
           <p>Atendimento via videochamada. Praticidade e conforto para você.</p>
           <p><strong>Email:</strong> online@kyrios.com.br</p>
-          <!-- Botão abre chat e envia "Agendamento" -->
-          <button class="btn-agendar">Agendar</button>
+          <button onclick="abrirAgendamento('online')">Agendar</button>
         </div>
       </div>
     </section>
@@ -355,46 +339,35 @@
     }
   </script>
 
-  <!-- Script para abrir/fechar chat e enviar mensagens iniciais -->
+  <!-- Script para abrir/fechar chat e enviar mensagem inicial -->
   <script>
     const btnAbrir = document.getElementById('btn-abrir-chat');
     const overlay = document.getElementById('chat-overlay');
     const btnFechar = document.getElementById('btn-fechar-chat');
     const iframe = document.getElementById('iframe-sofia-chat');
 
-    // Função para abrir chat e enviar mensagem via postMessage
-    function abrirChatComMensagem(mensagem) {
+    btnAbrir.addEventListener('click', () => {
       overlay.style.display = 'flex';
 
-      // PostMessage para iframe, tenta enviar a mensagem
+      // Envia mensagem inicial ao iframe via postMessage, se suportado
       iframe.contentWindow.postMessage({
         type: 'sendMessage',
-        message: mensagem
+        message: "Olá! Como posso ajudar? (Digite 'Suporte' para atendimento humano.)"
       }, '*');
-    }
-
-    btnAbrir.addEventListener('click', () => {
-      abrirChatComMensagem("Olá! Como posso ajudar? (Digite 'Suporte' para atendimento humano.)");
     });
 
     btnFechar.addEventListener('click', () => {
       overlay.style.display = 'none';
     });
 
+    // Fecha chat ao clicar fora do iframe
     overlay.addEventListener('click', (e) => {
       if (e.target === overlay) {
         overlay.style.display = 'none';
       }
     });
 
-    // Botões de agendamento abrem chat com mensagem "Agendamento"
-    document.querySelectorAll('.btn-agendar').forEach(btn => {
-      btn.addEventListener('click', () => {
-        abrirChatComMensagem("Agendamento");
-      });
-    });
-
-    // Opcional: alerta sobre "suporte" caso o usuário digite na conversa (se integrado)
+    // Escuta mensagem do iframe para alertar sobre "suporte"
     window.addEventListener('message', (event) => {
       if (!event.data) return;
 
@@ -410,6 +383,7 @@
 </body>
 
 </html>
+
 
 
 
