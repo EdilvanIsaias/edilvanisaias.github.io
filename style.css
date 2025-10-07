@@ -1,9 +1,16 @@
+/* ===== BASE GERAL ===== */
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
   background: #f5f7fa;
   color: #333;
   line-height: 1.6;
+}
+
+.container {
+  max-width: 960px;
+  margin: auto;
+  padding: 2rem;
 }
 
 /* ===== NAVBAR ===== */
@@ -88,32 +95,53 @@ nav ul ul li a:hover {
   transition: background-color 0.3s ease;
 }
 
-/* ---------- HEADER ---------- */
-header {
-  background: url('images/header-bg.jpg') center/cover no-repeat;
-  color: white;
-  text-align: center;
+/* ===== HEADER / SLIDESHOW ===== */
+.slideshow {
   position: relative;
-  height: 70vh;
+  height: 90vh;
+  overflow: hidden;
 }
 
-header .overlay {
-  background-color: rgba(0, 0, 0, 0.5);
+.slides {
+  display: none;
   height: 100%;
+  width: 100%;
+}
+
+.slides img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* corta mantendo proporção central */
+  filter: brightness(70%);
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.45);
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
   flex-direction: column;
+  padding: 0 1rem;
 }
 
-/* ---------- CONTAINER ---------- */
-.container {
-  max-width: 960px;
-  margin: auto;
-  padding: 2rem;
+.overlay h1 {
+  font-size: 3em;
+  margin-bottom: 0.3em;
 }
 
-/* ---------- SEÇÕES ---------- */
+.overlay p {
+  font-size: 1.3em;
+  max-width: 700px;
+}
+
+/* ===== SEÇÕES ===== */
 .about,
 .agendamentos,
 .calendar {
@@ -124,7 +152,17 @@ header .overlay {
   box-shadow: 0 0 15px rgba(0,0,0,0.05);
 }
 
-/* ---------- CARDS ---------- */
+.about p {
+  line-height: 1.6;
+  font-size: 1.1em;
+}
+
+h2 {
+  color: #222;
+  margin-bottom: 15px;
+}
+
+/* ===== CARDS ===== */
 .cards {
   display: flex;
   gap: 2rem;
@@ -140,10 +178,17 @@ header .overlay {
   max-width: 400px;
   text-align: center;
   box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
 }
 
 .card img {
-  max-width: 100%;
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
   border-radius: 10px;
   margin-bottom: 1rem;
 }
@@ -164,7 +209,7 @@ header .overlay {
   background-color: #157347;
 }
 
-/* ---------- CALENDÁRIO ---------- */
+/* ===== CALENDÁRIO ===== */
 .calendar h2 {
   margin-bottom: 0.5rem;
 }
@@ -179,13 +224,12 @@ header .overlay {
   gap: 1rem;
 }
 
-/* ---------- FOOTER ---------- */
+/* ===== FOOTER ===== */
 footer {
-  background-color: #024873;
+  background: linear-gradient(to top, #013a5f, #046ba7);
   color: white;
   padding: 3rem 2rem;
   margin-top: 4rem;
-  background: linear-gradient(to top, #013a5f, #046ba7);
 }
 
 footer ul {
@@ -239,4 +283,22 @@ footer p {
   font-size: 24px;
   cursor: pointer;
   color: #666;
+}
+
+/* ===== ANIMAÇÃO SLIDES ===== */
+.fade {
+  animation: fadeEffect 1.5s ease-in-out;
+}
+
+@keyframes fadeEffect {
+  from { opacity: 0.4; }
+  to { opacity: 1; }
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 768px) {
+  .overlay h1 { font-size: 2em; }
+  .overlay p { font-size: 1em; }
+  .cards { flex-direction: column; }
+  nav ul { flex-direction: column; gap: 1rem; }
 }
