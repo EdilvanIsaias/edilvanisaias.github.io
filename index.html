@@ -360,9 +360,23 @@
   const overlay = document.getElementById('chat-overlay');
   const btnFechar = document.getElementById('btn-fechar-chat');
   const iframe = document.getElementById('iframe-sofia-chat');
+    
+function abrirChatComMensagem(mensagem) {
+  overlay.style.display = 'flex';
 
-  function abrirChatComMensagem(mensagem) {
-    overlay.style.display = 'flex';
+  // Espera 1 segundo para garantir que o iframe carregue
+  setTimeout(() => {
+    try {
+      iframe.contentWindow.postMessage({
+        type: 'sendMessage',
+        message: mensagem
+      }, '*');
+    } catch (e) {
+      console.warn("Não foi possível enviar mensagem ao chat:", e);
+    }
+  }, 1000);
+}
+
 
     // Aguarda o iframe carregar, então envia a mensagem
     setTimeout(() => {
@@ -437,6 +451,7 @@ window.addEventListener('load', () => {
 
 </body>
 </html>
+
 
 
 
